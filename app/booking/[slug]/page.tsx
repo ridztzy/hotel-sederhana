@@ -1,7 +1,13 @@
-import { mockRooms } from '@/lib/data';
+import { mockRooms, mockBookings } from '@/lib/data';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import { notFound } from 'next/navigation';
+
+export async function generateStaticParams() {
+  return mockBookings.map((booking) => ({
+    slug: booking.roomId, // atau booking.id, sesuaikan dengan dynamic param kamu
+  }));
+}
 
 export default function BookingPage({ params }: { params: { slug: string } }) {
   const room = mockRooms.find((r) => r.slug === params.slug);
