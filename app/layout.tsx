@@ -6,8 +6,8 @@ import { ThemeProvider } from '@/components/theme-provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'LuxeStay - Premium Hotel Booking',
-  description: 'Discover and book premium hotel rooms with LuxeStay. Experience luxury accommodation with world-class amenities.',
+  title: 'LuxeStay - Pemesanan Hotel Premium',
+  description: 'Temukan dan pesan kamar hotel premium dengan LuxeStay. Nikmati akomodasi mewah dengan fasilitas kelas dunia.',
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}

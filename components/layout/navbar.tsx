@@ -52,20 +52,20 @@ export default function Navbar() {
               href="/" 
               className="text-sm font-medium hover:text-primary transition-colors"
             >
-              Home
+              Beranda
             </Link>
             <Link 
               href="/rooms" 
               className="text-sm font-medium hover:text-primary transition-colors"
             >
-              Rooms
+              Kamar
             </Link>
             {isAuthenticated && !isAdmin && (
               <Link 
                 href="/bookings" 
                 className="text-sm font-medium hover:text-primary transition-colors"
               >
-                My Bookings
+                Pemesanan Saya
               </Link>
             )}
             {isAdmin && (
@@ -73,7 +73,7 @@ export default function Navbar() {
                 href="/dashboard" 
                 className="text-sm font-medium hover:text-primary transition-colors"
               >
-                Dashboard
+                Dasbor
               </Link>
             )}
           </div>
@@ -96,7 +96,7 @@ export default function Navbar() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                    <User className="h-4 w-4" />
+                    <Sun className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -113,7 +113,7 @@ export default function Navbar() {
                     <DropdownMenuItem asChild>
                       <Link href="/bookings">
                         <Calendar className="mr-2 h-4 w-4" />
-                        My Bookings
+                        Pemesanan Saya
                       </Link>
                     </DropdownMenuItem>
                   )}
@@ -121,24 +121,24 @@ export default function Navbar() {
                     <DropdownMenuItem asChild>
                       <Link href="/dashboard">
                         <Settings className="mr-2 h-4 w-4" />
-                        Dashboard
+                        Dasbor
                       </Link>
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout}>
                     <LogOut className="mr-2 h-4 w-4" />
-                    Log out
+                    Keluar
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
               <div className="hidden md:flex items-center space-x-2">
                 <Button variant="ghost" asChild>
-                  <Link href="/login">Sign In</Link>
+                  <Link href="/login">Masuk</Link>
                 </Button>
                 <Button asChild>
-                  <Link href="/register">Get Started</Link>
+                  <Link href="/register">Daftar</Link>
                 </Button>
               </div>
             )}
@@ -164,14 +164,14 @@ export default function Navbar() {
                 className="block px-3 py-2 text-base font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                Beranda
               </Link>
               <Link
                 href="/rooms"
                 className="block px-3 py-2 text-base font-medium hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Rooms
+                Kamar
               </Link>
               {isAuthenticated && !isAdmin && (
                 <Link
@@ -179,7 +179,7 @@ export default function Navbar() {
                   className="block px-3 py-2 text-base font-medium hover:text-primary transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  My Bookings
+                  Pemesanan Saya
                 </Link>
               )}
               {isAdmin && (
@@ -188,7 +188,7 @@ export default function Navbar() {
                   className="block px-3 py-2 text-base font-medium hover:text-primary transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Dashboard
+                  Dasbor
                 </Link>
               )}
               
@@ -196,12 +196,12 @@ export default function Navbar() {
                 <div className="flex flex-col space-y-2 px-3 py-2">
                   <Button variant="ghost" asChild>
                     <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                      Sign In
+                      Masuk
                     </Link>
                   </Button>
                   <Button asChild>
                     <Link href="/register" onClick={() => setIsMenuOpen(false)}>
-                      Get Started
+                      Daftar
                     </Link>
                   </Button>
                 </div>
@@ -216,7 +216,7 @@ export default function Navbar() {
                     onClick={handleLogout}
                   >
                     <LogOut className="mr-2 h-4 w-4" />
-                    Log out
+                    Keluar
                   </Button>
                 </div>
               )}

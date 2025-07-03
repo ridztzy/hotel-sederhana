@@ -54,13 +54,13 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Experience Luxury
+              Rasakan Kemewahan
               <span className="block bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-                Beyond Imagination
+                Melampaui Imajinasi
               </span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200">
-              Discover world-class accommodations with unparalleled service and breathtaking views
+              Temukan akomodasi kelas dunia dengan layanan terbaik dan pemandangan menakjubkan
             </p>
           </motion.div>
 
@@ -94,28 +94,28 @@ export default function HomePage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="guests">Guests</Label>
+                    <Label htmlFor="guests">Tamu</Label>
                     <Select value={guests} onValueChange={setGuests}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1">1 Guest</SelectItem>
-                        <SelectItem value="2">2 Guests</SelectItem>
-                        <SelectItem value="3">3 Guests</SelectItem>
-                        <SelectItem value="4">4 Guests</SelectItem>
+                        <SelectItem value="1">1 Tamu</SelectItem>
+                        <SelectItem value="2">2 Tamu</SelectItem>
+                        <SelectItem value="3">3 Tamu</SelectItem>
+                        <SelectItem value="4">4 Tamu</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="roomtype">Room Type</Label>
+                    <Label htmlFor="roomtype">Tipe Kamar</Label>
                     <Select value={roomType} onValueChange={setRoomType}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">All Types</SelectItem>
-                        <SelectItem value="standard">Standard</SelectItem>
+                        <SelectItem value="all">Semua Tipe</SelectItem>
+                        <SelectItem value="standard">Standar</SelectItem>
                         <SelectItem value="deluxe">Deluxe</SelectItem>
                         <SelectItem value="suite">Suite</SelectItem>
                         <SelectItem value="presidential">Presidential</SelectItem>
@@ -125,7 +125,7 @@ export default function HomePage() {
                   <div className="flex items-end">
                     <Button onClick={handleSearch} className="w-full bg-primary hover:bg-primary/90">
                       <Search className="mr-2 h-4 w-4" />
-                      Search Rooms
+                      Cari Kamar
                     </Button>
                   </div>
                 </div>
@@ -144,9 +144,9 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose LuxeStay?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Kenapa Memilih LuxeStay?</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Experience unmatched luxury and service that sets us apart from the rest
+              Rasakan kemewahan dan layanan tak tertandingi yang membedakan kami dari yang lain
             </p>
           </motion.div>
 
@@ -154,23 +154,23 @@ export default function HomePage() {
             {[
               {
                 icon: Award,
-                title: 'Award-Winning Service',
-                description: 'Recognized globally for exceptional hospitality and guest satisfaction'
+                title: 'Layanan Berkelas Dunia',
+                description: 'Diakui secara global atas keramahan dan kepuasan tamu yang luar biasa'
               },
               {
                 icon: Shield,
-                title: 'Safe & Secure',
-                description: '24/7 security and contactless check-in for your peace of mind'
+                title: 'Aman & Terjamin',
+                description: 'Keamanan 24/7 dan check-in tanpa kontak demi ketenangan Anda'
               },
               {
                 icon: Headphones,
-                title: 'Concierge Support',
-                description: 'Personal concierge available around the clock for all your needs'
+                title: 'Dukungan Concierge',
+                description: 'Concierge pribadi siap membantu Anda kapan saja'
               },
               {
                 icon: Wifi,
-                title: 'Premium Amenities',
-                description: 'High-speed WiFi, spa, fitness center, and world-class dining'
+                title: 'Fasilitas Premium',
+                description: 'WiFi berkecepatan tinggi, spa, pusat kebugaran, dan restoran kelas dunia'
               }
             ].map((feature, index) => (
               <motion.div
@@ -201,9 +201,9 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Rooms & Suites</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Kamar & Suite Unggulan</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover our most popular accommodations, each designed to provide the ultimate in comfort and luxury
+              Temukan akomodasi terpopuler kami, dirancang untuk kenyamanan dan kemewahan terbaik
             </p>
           </motion.div>
 
@@ -223,7 +223,7 @@ export default function HomePage() {
           <div className="text-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
               <Link href="/rooms">
-                View All Rooms
+                Lihat Semua Kamar
               </Link>
             </Button>
           </div>
@@ -239,20 +239,20 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Ready for Your Dream Getaway?
+              Siap untuk Liburan Impian Anda?
             </h2>
             <p className="text-xl mb-8 text-blue-100">
-              Book now and experience luxury like never before. Special offers available for early bookings.
+              Pesan sekarang dan rasakan kemewahan tiada duanya. Penawaran spesial untuk pemesanan awal.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" variant="secondary" asChild>
                 <Link href="/rooms">
                   <Calendar className="mr-2 h-5 w-5" />
-                  Book Your Stay
+                  Pesan Sekarang
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-                Contact Us
+                Hubungi Kami
               </Button>
             </div>
           </motion.div>

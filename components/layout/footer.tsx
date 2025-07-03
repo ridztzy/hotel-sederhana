@@ -15,7 +15,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Experience luxury and comfort at LuxeStay. Your perfect getaway awaits with world-class amenities and exceptional service.
+              Nikmati kemewahan dan kenyamanan di LuxeStay. Liburan sempurna Anda menanti dengan fasilitas kelas dunia dan layanan istimewa.
             </p>
             <div className="flex space-x-4">
               <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -35,31 +35,31 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Quick Links</h3>
+            <h3 className="text-lg font-semibold">Tautan Cepat</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Home
+                  Beranda
                 </Link>
               </li>
               <li>
                 <Link href="/rooms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Rooms & Suites
+                  Kamar & Suite
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Amenities
+                  Fasilitas
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  About Us
+                  Tentang Kami
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Contact
+                  Kontak
                 </Link>
               </li>
             </ul>
@@ -67,26 +67,26 @@ export default function Footer() {
 
           {/* Services */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Services</h3>
+            <h3 className="text-lg font-semibold">Layanan</h3>
             <ul className="space-y-2">
               <li>
                 <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Room Service
+                  Layanan Kamar
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Spa & Wellness
+                  Spa & Kesehatan
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Fine Dining
+                  Restoran Mewah
                 </Link>
               </li>
               <li>
                 <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Business Center
+                  Pusat Bisnis
                 </Link>
               </li>
               <li>
@@ -99,18 +99,18 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Contact Info</h3>
+            <h3 className="text-lg font-semibold">Kontak</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <MapPin className="h-4 w-4 text-primary" />
                 <span className="text-sm text-muted-foreground">
-                  123 Luxury Avenue, Downtown, NY 10001
+                  Jl. Kemewahan 123, Pusat Kota, Jakarta 10001
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-primary" />
                 <span className="text-sm text-muted-foreground">
-                  +1 (555) 123-4567
+                  +62 (21) 1234-5678
                 </span>
               </div>
               <div className="flex items-center space-x-3">
@@ -125,17 +125,17 @@ export default function Footer() {
 
         <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 LuxeStay. All rights reserved.
+            © 2024 LuxeStay. Hak cipta dilindungi undang-undang.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Privacy Policy
+              Kebijakan Privasi
             </Link>
             <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
+              Syarat & Ketentuan
             </Link>
             <Link href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Cookie Policy
+              Kebijakan Cookie
             </Link>
           </div>
         </div>
