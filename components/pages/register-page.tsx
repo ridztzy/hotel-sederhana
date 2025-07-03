@@ -28,8 +28,8 @@ export default function RegisterPage() {
     
     if (!name || !email || !password || !confirmPassword) {
       toast({
-        title: "Error",
-        description: "Please fill in all fields",
+        title: "Kesalahan",
+        description: "Silakan isi semua kolom",
         variant: "destructive",
       });
       return;
@@ -37,8 +37,8 @@ export default function RegisterPage() {
 
     if (password !== confirmPassword) {
       toast({
-        title: "Error",
-        description: "Passwords do not match",
+        title: "Kesalahan",
+        description: "Kata sandi tidak cocok",
         variant: "destructive",
       });
       return;
@@ -46,8 +46,8 @@ export default function RegisterPage() {
 
     if (password.length < 6) {
       toast({
-        title: "Error",
-        description: "Password must be at least 6 characters long",
+        title: "Kesalahan",
+        description: "Kata sandi minimal 6 karakter",
         variant: "destructive",
       });
       return;
@@ -57,14 +57,14 @@ export default function RegisterPage() {
     
     if (success) {
       toast({
-        title: "Success",
-        description: "Account created successfully!",
+        title: "Berhasil",
+        description: "Akun berhasil dibuat!",
       });
       router.push('/');
     } else {
       toast({
-        title: "Error",
-        description: "Failed to create account. Please try again.",
+        title: "Kesalahan",
+        description: "Gagal membuat akun. Silakan coba lagi.",
         variant: "destructive",
       });
     }
@@ -85,21 +85,21 @@ export default function RegisterPage() {
               LuxeStay
             </span>
           </Link>
-          <h1 className="text-2xl font-bold">Create Account</h1>
-          <p className="text-muted-foreground">Join LuxeStay for exclusive benefits</p>
+          <h1 className="text-2xl font-bold">Buat Akun</h1>
+          <p className="text-muted-foreground">Gabung dengan LuxeStay untuk berbagai keuntungan eksklusif</p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Sign Up</CardTitle>
+            <CardTitle>Daftar</CardTitle>
             <CardDescription>
-              Create your account to start booking luxury accommodations
+              Buat akun Anda untuk mulai memesan akomodasi mewah
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">Nama Lengkap</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -107,7 +107,7 @@ export default function RegisterPage() {
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter your full name"
+                    placeholder="Masukkan nama lengkap Anda"
                     className="pl-10"
                     disabled={loading}
                   />
@@ -123,7 +123,7 @@ export default function RegisterPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
+                    placeholder="Masukkan email Anda"
                     className="pl-10"
                     disabled={loading}
                   />
@@ -131,7 +131,7 @@ export default function RegisterPage() {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Kata Sandi</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -139,7 +139,7 @@ export default function RegisterPage() {
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Create a password"
+                    placeholder="Buat kata sandi"
                     className="pl-10 pr-10"
                     disabled={loading}
                   />
@@ -160,7 +160,7 @@ export default function RegisterPage() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Label htmlFor="confirmPassword">Konfirmasi Kata Sandi</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -168,7 +168,7 @@ export default function RegisterPage() {
                     type={showConfirmPassword ? "text" : "password"}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="Confirm your password"
+                    placeholder="Konfirmasi kata sandi Anda"
                     className="pl-10 pr-10"
                     disabled={loading}
                   />
@@ -193,15 +193,15 @@ export default function RegisterPage() {
                 className="w-full" 
                 disabled={loading}
               >
-                {loading ? "Creating Account..." : "Create Account"}
+                {loading ? "Membuat Akun..." : "Buat Akun"}
               </Button>
             </form>
 
             <div className="mt-6 text-center text-sm">
               <p className="text-muted-foreground">
-                Already have an account?{' '}
+                Sudah punya akun?{' '}
                 <Link href="/login" className="text-primary hover:underline">
-                  Sign in
+                  Masuk
                 </Link>
               </p>
             </div>

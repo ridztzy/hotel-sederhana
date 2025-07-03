@@ -105,9 +105,9 @@ export default function RoomsPage() {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Rooms & Suites</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Kamar & Suite Kami</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discover the perfect accommodation for your stay. From elegant standard rooms to luxurious presidential suites.
+              Temukan akomodasi sempurna untuk menginap Anda. Dari kamar standar elegan hingga suite presiden mewah.
             </p>
           </motion.div>
         </div>
@@ -118,20 +118,20 @@ export default function RoomsPage() {
           {/* Filters Sidebar */}
           <div className="lg:w-80">
             <div className="flex items-center justify-between mb-6 lg:hidden">
-              <h2 className="text-xl font-semibold">Filters</h2>
+              <h2 className="text-xl font-semibold">Filter</h2>
               <Button
                 variant="outline"
                 onClick={() => setShowFilters(!showFilters)}
               >
                 <SlidersHorizontal className="h-4 w-4 mr-2" />
-                {showFilters ? 'Hide' : 'Show'} Filters
+                {showFilters ? 'Sembunyikan' : 'Tampilkan'} Filter
               </Button>
             </div>
 
             <div className={`space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}>
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-4">Search Dates</h3>
+                  <h3 className="font-semibold mb-4">Tanggal Pencarian</h3>
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="checkin">Check-in</Label>
@@ -157,51 +157,51 @@ export default function RoomsPage() {
 
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-4">Room Details</h3>
+                  <h3 className="font-semibold mb-4">Detail Kamar</h3>
                   <div className="space-y-4">
                     <div className="space-y-2">
-                      <Label>Guests</Label>
+                      <Label>Tamu</Label>
                       <Select value={guests} onValueChange={setGuests}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">Any Number</SelectItem>
-                          <SelectItem value="1">1 Guest</SelectItem>
-                          <SelectItem value="2">2 Guests</SelectItem>
-                          <SelectItem value="3">3 Guests</SelectItem>
-                          <SelectItem value="4">4+ Guests</SelectItem>
+                          <SelectItem value="all">Semua Jumlah</SelectItem>
+                          <SelectItem value="1">1 Tamu</SelectItem>
+                          <SelectItem value="2">2 Tamu</SelectItem>
+                          <SelectItem value="3">3 Tamu</SelectItem>
+                          <SelectItem value="4">4+ Tamu</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Room Type</Label>
+                      <Label>Tipe Kamar</Label>
                       <Select value={roomType} onValueChange={setRoomType}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">All Types</SelectItem>
-                          <SelectItem value="standard">Standard</SelectItem>
+                          <SelectItem value="all">Semua Tipe</SelectItem>
+                          <SelectItem value="standard">Standar</SelectItem>
                           <SelectItem value="deluxe">Deluxe</SelectItem>
                           <SelectItem value="suite">Suite</SelectItem>
-                          <SelectItem value="presidential">Presidential</SelectItem>
+                          <SelectItem value="presidential">Presiden</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
 
                     <div className="space-y-2">
-                      <Label>Price Range</Label>
+                      <Label>Kisaran Harga</Label>
                       <Select value={priceRange} onValueChange={setPriceRange}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="all">All Prices</SelectItem>
-                          <SelectItem value="budget">Under $400</SelectItem>
-                          <SelectItem value="mid">$400 - $1,000</SelectItem>
-                          <SelectItem value="luxury">$1,000+</SelectItem>
+                          <SelectItem value="all">Semua Harga</SelectItem>
+                          <SelectItem value="budget">Di bawah Rp400.000</SelectItem>
+                          <SelectItem value="mid">Rp400.000 - Rp1.000.000</SelectItem>
+                          <SelectItem value="luxury">Di atas Rp1.000.000</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -210,7 +210,7 @@ export default function RoomsPage() {
               </Card>
 
               <Button onClick={clearFilters} variant="outline" className="w-full">
-                Clear All Filters
+                Hapus Semua Filter
               </Button>
             </div>
           </div>
@@ -219,24 +219,24 @@ export default function RoomsPage() {
           <div className="flex-1">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h2 className="text-2xl font-bold">Available Rooms</h2>
+                <h2 className="text-2xl font-bold">Kamar Tersedia</h2>
                 <p className="text-muted-foreground">
-                  {filteredRooms.length} room{filteredRooms.length !== 1 ? 's' : ''} found
+                  {filteredRooms.length} kamar ditemukan
                 </p>
               </div>
               
               <div className="flex items-center space-x-4">
-                <Label htmlFor="sort">Sort by:</Label>
+                <Label htmlFor="sort">Urutkan:</Label>
                 <Select value={sortBy} onValueChange={setSortBy}>
                   <SelectTrigger className="w-40">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="featured">Featured</SelectItem>
-                    <SelectItem value="price-low">Price: Low to High</SelectItem>
-                    <SelectItem value="price-high">Price: High to Low</SelectItem>
-                    <SelectItem value="rating">Highest Rated</SelectItem>
-                    <SelectItem value="size">Largest First</SelectItem>
+                    <SelectItem value="featured">Unggulan</SelectItem>
+                    <SelectItem value="price-low">Harga: Termurah</SelectItem>
+                    <SelectItem value="price-high">Harga: Termahal</SelectItem>
+                    <SelectItem value="rating">Rating Tertinggi</SelectItem>
+                    <SelectItem value="size">Paling Luas</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -246,11 +246,11 @@ export default function RoomsPage() {
               <Card>
                 <CardContent className="p-12 text-center">
                   <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">No rooms found</h3>
+                  <h3 className="text-xl font-semibold mb-2">Kamar tidak ditemukan</h3>
                   <p className="text-muted-foreground mb-4">
-                    Try adjusting your filters to see more options.
+                    Coba ubah filter untuk melihat pilihan lainnya.
                   </p>
-                  <Button onClick={clearFilters}>Clear Filters</Button>
+                  <Button onClick={clearFilters}>Hapus Filter</Button>
                 </CardContent>
               </Card>
             ) : (

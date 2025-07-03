@@ -95,8 +95,10 @@ export default function Navbar() {
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                    <Sun className="h-4 w-4" />
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
+                    <span className="flex items-center justify-center h-8 w-8 rounded-full bg-muted text-primary font-bold">
+                      {user?.name?.[0]?.toUpperCase() || <User className="h-5 w-5" />}
+                    </span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end" forceMount>

@@ -76,20 +76,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     dispatch({ type: 'SET_LOADING', payload: true });
-    
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Mock authentication
-    const user = mockUsers.find(u => u.email === email);
-    if (user && (password === 'password' || (email === 'admin@luxestay.com' && password === 'admin123'))) {
-      localStorage.setItem('user', JSON.stringify(user));
-      dispatch({ type: 'LOGIN_SUCCESS', payload: user });
-      return true;
+
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        const user = data.user;
+        localStorage.setItem('user', JSON.stringify(user));
+        dispatch({ type: 'LOGIN_SUCCESS', payload: user });
+        return true;
+      }
+      dispatch({ type: 'SET_LOADING', payload: false });
+      return false;
+    } catch (error) {
+      dispatch({ type: 'SET_LOADING', payload: false });
+      return false;
     }
-    
-    dispatch({ type: 'SET_LOADING', payload: false });
-    return false;
   };
 
   const logout = () => {
@@ -99,21 +106,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     dispatch({ type: 'SET_LOADING', payload: true });
-    
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Mock registration
-    const newUser: User = {
-      id: `u${Date.now()}`,
-      name,
-      email,
-      role: 'customer'
-    };
-    
-    localStorage.setItem('user', JSON.stringify(newUser));
-    dispatch({ type: 'LOGIN_SUCCESS', payload: newUser });
-    return true;
+
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        const user = data.user;
+        const newUser: User = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role || 'customer',
+        };
+        localStorage.setItem('user', JSON.stringify(newUser));
+        dispatch({ type: 'LOGIN_SUCCESS', payload: newUser });
+        return true;
+      } else {
+        dispatch({ type: 'SET_LOADING', payload: false });
+        return false;
+      }
+    } catch (error) {
+      dispatch({ type: 'SET_LOADING', payload: false });
+      return false;
+    }
   };
 
   return (

@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import { useAuth } from '@/lib/auth-context';
@@ -84,6 +84,15 @@ export default function RoomDetailClient() {
       return;
     }
 
+    if (guests > room!.maxGuests) {
+      toast({
+        title: "Jumlah Tamu Melebihi Batas",
+        description: `Maksimal tamu untuk kamar ini adalah ${room!.maxGuests}.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsBooking(true);
     
     // Simulate booking process
@@ -137,7 +146,7 @@ export default function RoomDetailClient() {
           className="mb-6 flex items-center space-x-2"
         >
           <ArrowLeft className="h-4 w-4" />
-          <span>Back to Rooms</span>
+          <span>Kembali ke Daftar Kamar</span>
         </Button>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -181,7 +190,7 @@ export default function RoomDetailClient() {
                 ))}
               </div>
 
-              {/* Room Info */}
+              {/* Info Kamar */}
               <div className="space-y-6">
                 <div>
                   <h1 className="text-3xl font-bold mb-2">{room.name}</h1>
@@ -191,28 +200,28 @@ export default function RoomDetailClient() {
                     <div className="flex items-center space-x-2">
                       <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
                       <span className="font-medium">{room.rating}</span>
-                      <span className="text-muted-foreground">({room.reviewCount} reviews)</span>
+                      <span className="text-muted-foreground">({room.reviewCount} ulasan)</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Users className="h-5 w-5 text-muted-foreground" />
-                      <span>Up to {room.maxGuests} guests</span>
+                      <span>Maksimal {room.maxGuests} tamu</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Square className="h-5 w-5 text-muted-foreground" />
-                      <span>{room.size} sq ft</span>
+                      <span>{room.size} ft²</span>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-semibold mb-4">Description</h2>
+                  <h2 className="text-2xl font-semibold mb-4">Deskripsi</h2>
                   <p className="text-muted-foreground leading-relaxed">{room.description}</p>
                 </div>
 
-                {/* Features */}
+                {/* Fitur Khusus */}
                 {room.features.length > 0 && (
                   <div>
-                    <h2 className="text-2xl font-semibold mb-4">Special Features</h2>
+                    <h2 className="text-2xl font-semibold mb-4">Fitur Khusus</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {room.features.map((feature, index) => (
                         <div key={index} className="flex items-center space-x-2">
@@ -224,9 +233,9 @@ export default function RoomDetailClient() {
                   </div>
                 )}
 
-                {/* Amenities */}
+                {/* Fasilitas */}
                 <div>
-                  <h2 className="text-2xl font-semibold mb-4">Amenities</h2>
+                  <h2 className="text-2xl font-semibold mb-4">Fasilitas</h2>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {room.amenities.map((amenity, index) => (
                       <div key={index} className="flex items-center space-x-2">
@@ -260,10 +269,10 @@ export default function RoomDetailClient() {
               <Card className="sticky top-8">
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between">
-                    <span>Book Your Stay</span>
-                    <span className="text-2xl font-bold">${room.price}</span>
+                    <span>Pesan Kamar Ini</span>
+                    <span className="text-2xl font-bold">Rp{room.price.toLocaleString('id-ID')}</span>
                   </CardTitle>
-                  <CardDescription>per night</CardDescription>
+                  <CardDescription>per malam</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
@@ -290,69 +299,97 @@ export default function RoomDetailClient() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="guests">Guests</Label>
+                    <Label htmlFor="guests">Tamu</Label>
                     <Input
                       id="guests"
                       type="number"
                       min="1"
                       max={room.maxGuests}
                       value={guests}
-                      onChange={(e) => setGuests(parseInt(e.target.value))}
+                      onChange={(e) => {
+                        const value = parseInt(e.target.value);
+                        if (value > room.maxGuests) {
+                          setGuests(room.maxGuests);
+                        } else if (value < 1 || isNaN(value)) {
+                          setGuests(1);
+                        } else {
+                          setGuests(value);
+                        }
+                      }}
                     />
                   </div>
 
                   {checkIn && checkOut && (
                     <div className="space-y-2 p-4 bg-muted/50 rounded-lg">
                       <div className="flex justify-between">
-                        <span>${room.price} × {calculateNights()} nights</span>
-                        <span>${room.price * calculateNights()}</span>
+                        <span>Rp{room.price.toLocaleString('id-ID')} × {calculateNights()} malam</span>
+                        <span>Rp{(room.price * calculateNights()).toLocaleString('id-ID')}</span>
                       </div>
                       <div className="flex justify-between font-semibold text-lg border-t pt-2">
                         <span>Total</span>
-                        <span>${calculateTotal()}</span>
+                        <span>Rp{calculateTotal().toLocaleString('id-ID')}</span>
                       </div>
                     </div>
                   )}
 
+                  <Button
+                    className="w-full"
+                    size="lg"
+                    disabled={!room.available}
+                    onClick={() => {
+                      if (!isAuthenticated) {
+                        toast({
+                          title: "Silakan Masuk",
+                          description: "Anda harus login untuk melakukan pemesanan.",
+                          variant: "destructive",
+                        });
+                        router.push('/login');
+                        return;
+                      }
+                      if (!checkIn || !checkOut) {
+                        toast({
+                          title: "Tanggal Belum Diisi",
+                          description: "Silakan pilih tanggal check-in dan check-out terlebih dahulu.",
+                          variant: "destructive",
+                        });
+                        return;
+                      }
+                      setShowBookingDialog(true);
+                    }}
+                  >
+                    {room.available ? (
+                      <>
+                        <Calendar className="mr-2 h-4 w-4" />
+                        Pesan Sekarang
+                      </>
+                    ) : (
+                      'Tidak Tersedia'
+                    )}
+                  </Button>
+
                   <Dialog open={showBookingDialog} onOpenChange={setShowBookingDialog}>
-                    <DialogTrigger asChild>
-                      <Button 
-                        className="w-full" 
-                        size="lg"
-                        disabled={!room.available}
-                      >
-                        {room.available ? (
-                          <>
-                            <Calendar className="mr-2 h-4 w-4" />
-                            Reserve Now
-                          </>
-                        ) : (
-                          'Currently Unavailable'
-                        )}
-                      </Button>
-                    </DialogTrigger>
                     <DialogContent className="max-w-md">
                       <DialogHeader>
-                        <DialogTitle>Confirm Your Booking</DialogTitle>
+                        <DialogTitle>Konfirmasi Pemesanan</DialogTitle>
                         <DialogDescription>
-                          Review your reservation details before confirming
+                          Periksa kembali detail reservasi Anda sebelum mengonfirmasi
                         </DialogDescription>
                       </DialogHeader>
                       <div className="space-y-4">
                         <div className="space-y-2">
-                          <h4 className="font-medium">Room Details</h4>
+                          <h4 className="font-medium">Detail Kamar</h4>
                           <p className="text-sm text-muted-foreground">{room.name}</p>
                           <p className="text-sm text-muted-foreground">
-                            {checkIn} to {checkOut} ({calculateNights()} nights)
+                            {checkIn} sampai {checkOut} ({calculateNights()} malam)
                           </p>
-                          <p className="text-sm text-muted-foreground">{guests} guest{guests > 1 ? 's' : ''}</p>
+                          <p className="text-sm text-muted-foreground">{guests} tamu</p>
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="special-requests">Special Requests (Optional)</Label>
+                          <Label htmlFor="special-requests">Permintaan Khusus (Opsional)</Label>
                           <Textarea
                             id="special-requests"
-                            placeholder="Any special requests or requirements..."
+                            placeholder="Permintaan atau kebutuhan khusus..."
                             value={specialRequests}
                             onChange={(e) => setSpecialRequests(e.target.value)}
                             rows={3}
@@ -361,16 +398,16 @@ export default function RoomDetailClient() {
 
                         <div className="space-y-2 p-4 bg-muted/50 rounded-lg">
                           <div className="flex justify-between">
-                            <span>Room Rate</span>
-                            <span>${room.price} per night</span>
+                            <span>Harga Kamar</span>
+                            <span>Rp{room.price.toLocaleString('id-ID')} / malam</span>
                           </div>
                           <div className="flex justify-between">
-                            <span>Nights</span>
+                            <span>Malam</span>
                             <span>{calculateNights()}</span>
                           </div>
                           <div className="flex justify-between font-semibold text-lg border-t pt-2">
-                            <span>Total Amount</span>
-                            <span>${calculateTotal()}</span>
+                            <span>Total</span>
+                            <span>Rp{calculateTotal().toLocaleString('id-ID')}</span>
                           </div>
                         </div>
 
@@ -380,11 +417,11 @@ export default function RoomDetailClient() {
                           disabled={isBooking}
                         >
                           {isBooking ? (
-                            "Processing..."
+                            "Memproses..."
                           ) : (
                             <>
                               <CreditCard className="mr-2 h-4 w-4" />
-                              Confirm Booking
+                              Konfirmasi Pemesanan
                             </>
                           )}
                         </Button>
@@ -395,9 +432,9 @@ export default function RoomDetailClient() {
                   {!isAuthenticated && (
                     <p className="text-sm text-muted-foreground text-center">
                       <Button variant="link" className="p-0 h-auto" onClick={() => router.push('/login')}>
-                        Sign in
+                        Masuk
                       </Button>
-                      {' '}to make a reservation
+                      {' '}untuk melakukan reservasi
                     </p>
                   )}
                 </CardContent>

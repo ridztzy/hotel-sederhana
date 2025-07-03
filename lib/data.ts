@@ -1,134 +1,136 @@
 import { Room, Booking, User, BookingStats } from './types';
 
+// Data kamar contoh
 export const mockRooms: Room[] = [
   {
     id: '1',
     slug: 'presidential-suite',
     name: 'Presidential Suite',
     type: 'presidential',
-    price: 2500,
-    description: 'Experience the pinnacle of luxury in our Presidential Suite. This expansive 2,000 sq ft suite features a separate living area, marble bathroom with jacuzzi, private balcony with city views, and personalized butler service.',
-    shortDescription: 'Ultimate luxury with butler service and panoramic city views',
+    price: 2500000, // Harga dalam Rupiah
+    description: 'Rasakan puncak kemewahan di Presidential Suite kami. Suite seluas 2.000 kaki persegi ini memiliki ruang tamu terpisah, kamar mandi marmer dengan jacuzzi, balkon pribadi dengan pemandangan kota, dan layanan butler pribadi.',
+    shortDescription: 'Kemewahan tertinggi dengan layanan butler dan pemandangan kota panoramik',
     images: [
       'https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg',
       'https://images.pexels.com/photos/237371/pexels-photo-237371.jpeg',
       'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg'
     ],
-    amenities: ['King Bed', 'Living Area', 'Marble Bathroom', 'Jacuzzi', 'Butler Service', 'Private Balcony', 'Mini Bar', 'City View'],
+    amenities: ['Kasur King', 'Ruang Tamu', 'Kamar Mandi Marmer', 'Jacuzzi', 'Layanan Butler', 'Balkon Pribadi', 'Mini Bar', 'Pemandangan Kota'],
     maxGuests: 4,
     size: 2000,
     available: true,
     rating: 4.9,
     reviewCount: 127,
-    features: ['24/7 Butler Service', 'Premium City Views', 'Marble Finishes', 'Separate Living Area']
+    features: ['Layanan Butler 24/7', 'Pemandangan Kota Premium', 'Finishing Marmer', 'Ruang Tamu Terpisah']
   },
   {
     id: '2',
     slug: 'luxury-suite',
     name: 'Luxury Suite',
     type: 'suite',
-    price: 1200,
-    description: 'Our Luxury Suite offers sophisticated comfort with a separate bedroom and living area. Features include premium furnishings, marble bathroom, and stunning views of the city skyline.',
-    shortDescription: 'Spacious suite with separate living area and premium amenities',
+    price: 1200000, // Harga dalam Rupiah
+    description: 'Luxury Suite kami menawarkan kenyamanan mewah dengan kamar tidur dan ruang tamu terpisah. Dilengkapi furnitur premium, kamar mandi marmer, dan pemandangan indah kota.',
+    shortDescription: 'Suite luas dengan ruang tamu terpisah dan fasilitas premium',
     images: [
       'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg',
       'https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg',
       'https://images.pexels.com/photos/237371/pexels-photo-237371.jpeg'
     ],
-    amenities: ['King Bed', 'Living Area', 'Marble Bathroom', 'Mini Bar', 'Work Desk', 'City View', 'Premium WiFi'],
+    amenities: ['Kasur King', 'Ruang Tamu', 'Kamar Mandi Marmer', 'Mini Bar', 'Meja Kerja', 'Pemandangan Kota', 'WiFi Premium'],
     maxGuests: 3,
     size: 800,
     available: true,
     rating: 4.7,
     reviewCount: 89,
-    features: ['Separate Living Area', 'Premium Furnishings', 'City Views', 'Work Space']
+    features: ['Ruang Tamu Terpisah', 'Furnitur Premium', 'Pemandangan Kota', 'Ruang Kerja']
   },
   {
     id: '3',
     slug: 'deluxe-room',
     name: 'Deluxe Room',
     type: 'deluxe',
-    price: 450,
-    description: 'Elegantly appointed Deluxe Room featuring modern amenities, comfortable seating area, and beautiful views. Perfect for business travelers and couples seeking comfort and style.',
-    shortDescription: 'Modern comfort with elegant furnishings and city views',
+    price: 450000, // Harga dalam Rupiah
+    description: 'Deluxe Room yang elegan dengan fasilitas modern, area duduk nyaman, dan pemandangan indah. Cocok untuk pebisnis dan pasangan yang mencari kenyamanan dan gaya.',
+    shortDescription: 'Kenyamanan modern dengan furnitur elegan dan pemandangan kota',
     images: [
       'https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg',
       'https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg',
       'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg'
     ],
-    amenities: ['Queen Bed', 'Seating Area', 'Work Desk', 'Mini Fridge', 'Coffee Maker', 'City View', 'Premium WiFi'],
+    amenities: ['Kasur Queen', 'Area Duduk', 'Meja Kerja', 'Kulkas Mini', 'Pembuat Kopi', 'Pemandangan Kota', 'WiFi Premium'],
     maxGuests: 2,
     size: 400,
     available: true,
     rating: 4.5,
     reviewCount: 234,
-    features: ['Modern Design', 'Comfortable Seating', 'Business Amenities', 'Premium Location']
+    features: ['Desain Modern', 'Area Duduk Nyaman', 'Fasilitas Bisnis', 'Lokasi Premium']
   },
   {
     id: '4',
     slug: 'standard-room',
     name: 'Standard Room',
     type: 'standard',
-    price: 280,
-    description: 'Comfortable and well-appointed Standard Room with all essential amenities. Features contemporary design, comfortable bedding, and convenient location within the hotel.',
-    shortDescription: 'Comfortable accommodation with contemporary design',
+    price: 280000, // Harga dalam Rupiah
+    description: 'Standard Room yang nyaman dan lengkap dengan semua fasilitas penting. Desain kontemporer, tempat tidur nyaman, dan lokasi strategis di dalam hotel.',
+    shortDescription: 'Akomodasi nyaman dengan desain kontemporer',
     images: [
       'https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg',
       'https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg',
       'https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg'
     ],
-    amenities: ['Queen Bed', 'Work Desk', 'Mini Fridge', 'Coffee Maker', 'WiFi', 'Air Conditioning'],
+    amenities: ['Kasur Queen', 'Meja Kerja', 'Kulkas Mini', 'Pembuat Kopi', 'WiFi', 'AC'],
     maxGuests: 2,
     size: 300,
     available: true,
     rating: 4.2,
     reviewCount: 156,
-    features: ['Contemporary Design', 'Essential Amenities', 'Comfortable Bedding', 'Great Value']
+    features: ['Desain Kontemporer', 'Fasilitas Esensial', 'Tempat Tidur Nyaman', 'Harga Terjangkau']
   },
   {
     id: '5',
     slug: 'ocean-view-suite',
     name: 'Ocean View Suite',
     type: 'suite',
-    price: 1800,
-    description: 'Breathtaking Ocean View Suite with panoramic windows, private terrace, and luxurious amenities. Wake up to stunning sunrise views over the ocean.',
-    shortDescription: 'Stunning ocean views with private terrace',
+    price: 1800000, // Harga dalam Rupiah
+    description: 'Ocean View Suite dengan jendela panorama, teras pribadi, dan fasilitas mewah. Nikmati matahari terbit yang indah langsung dari kamar Anda.',
+    shortDescription: 'Pemandangan laut menakjubkan dengan teras pribadi',
     images: [
       'https://images.pexels.com/photos/237371/pexels-photo-237371.jpeg',
       'https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg',
       'https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg'
     ],
-    amenities: ['King Bed', 'Ocean View', 'Private Terrace', 'Living Area', 'Mini Bar', 'Jacuzzi', 'Premium WiFi'],
+    amenities: ['Kasur King', 'Pemandangan Laut', 'Teras Pribadi', 'Ruang Tamu', 'Mini Bar', 'Jacuzzi', 'WiFi Premium'],
     maxGuests: 4,
     size: 1200,
     available: true,
     rating: 4.8,
     reviewCount: 73,
-    features: ['Panoramic Ocean Views', 'Private Terrace', 'Luxury Amenities', 'Romantic Setting']
+    features: ['Pemandangan Laut Panorama', 'Teras Pribadi', 'Fasilitas Mewah', 'Suasana Romantis']
   },
   {
     id: '6',
     slug: 'garden-deluxe',
     name: 'Garden Deluxe',
     type: 'deluxe',
-    price: 520,
-    description: 'Peaceful Garden Deluxe room overlooking our manicured gardens. Features a private patio, elegant furnishings, and serene garden views.',
-    shortDescription: 'Serene garden views with private patio',
+    price: 520000, // Harga dalam Rupiah
+    description: 'Garden Deluxe yang tenang menghadap taman indah kami. Dilengkapi teras pribadi, furnitur elegan, dan pemandangan taman yang asri.',
+    shortDescription: 'Pemandangan taman asri dengan teras pribadi',
     images: [
       'https://images.pexels.com/photos/271643/pexels-photo-271643.jpeg',
       'https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg',
       'https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg'
     ],
-    amenities: ['King Bed', 'Garden View', 'Private Patio', 'Seating Area', 'Mini Bar', 'Work Desk', 'WiFi'],
+    amenities: ['Kasur King', 'Pemandangan Taman', 'Teras Pribadi', 'Area Duduk', 'Mini Bar', 'Meja Kerja', 'WiFi'],
     maxGuests: 2,
     size: 450,
     available: false,
     rating: 4.6,
     reviewCount: 91,
-    features: ['Garden Views', 'Private Patio', 'Peaceful Setting', 'Elegant Design']
+    features: ['Pemandangan Taman', 'Teras Pribadi', 'Suasana Tenang', 'Desain Elegan']
   }
 ];
 
+// Data pemesanan contoh
 export const mockBookings: Booking[] = [
   {
     id: 'b1',
@@ -137,15 +139,15 @@ export const mockBookings: Booking[] = [
     userId: 'u1',
     guestName: 'John Smith',
     guestEmail: 'john.smith@email.com',
-    guestPhone: '+1 234 567 8900',
+    guestPhone: '+62 812 3456 7890',
     checkIn: '2024-01-15',
     checkOut: '2024-01-18',
     guests: 2,
-    totalPrice: 7500,
+    totalPrice: 7500000, // Harga dalam Rupiah
     status: 'confirmed',
     paymentStatus: 'paid',
     createdAt: '2024-01-10T10:00:00Z',
-    specialRequests: 'Late checkout requested'
+    specialRequests: 'Permintaan checkout lebih lambat'
   },
   {
     id: 'b2',
@@ -154,11 +156,11 @@ export const mockBookings: Booking[] = [
     userId: 'u2',
     guestName: 'Sarah Johnson',
     guestEmail: 'sarah.j@email.com',
-    guestPhone: '+1 234 567 8901',
+    guestPhone: '+62 813 2345 6789',
     checkIn: '2024-01-20',
     checkOut: '2024-01-22',
     guests: 1,
-    totalPrice: 900,
+    totalPrice: 900000, // Harga dalam Rupiah
     status: 'pending',
     paymentStatus: 'pending',
     createdAt: '2024-01-12T14:30:00Z'
@@ -170,25 +172,26 @@ export const mockBookings: Booking[] = [
     userId: 'u3',
     guestName: 'Michael Brown',
     guestEmail: 'michael.brown@email.com',
-    guestPhone: '+1 234 567 8902',
+    guestPhone: '+62 814 1234 5678',
     checkIn: '2024-01-25',
     checkOut: '2024-01-28',
     guests: 3,
-    totalPrice: 3600,
+    totalPrice: 3600000, // Harga dalam Rupiah
     status: 'confirmed',
     paymentStatus: 'paid',
     createdAt: '2024-01-13T09:15:00Z',
-    specialRequests: 'Extra bed for child'
+    specialRequests: 'Tempat tidur tambahan untuk anak'
   }
 ];
 
+// Data pengguna contoh
 export const mockUsers: User[] = [
   {
     id: 'u1',
     name: 'John Smith',
     email: 'john.smith@email.com',
     role: 'customer',
-    phone: '+1 234 567 8900'
+    phone: '+62 812 3456 7890'
   },
   {
     id: 'admin1',
@@ -198,25 +201,26 @@ export const mockUsers: User[] = [
   }
 ];
 
+// Statistik pemesanan contoh
 export const mockStats: BookingStats = {
-  totalBookings: 156,
-  totalRevenue: 234580,
-  occupancyRate: 78.5,
-  averageRating: 4.6,
-  pendingBookings: 12,
-  confirmedBookings: 89,
+  totalBookings: 156, // Total Pemesanan
+  totalRevenue: 234580000, // Total Pendapatan (dalam Rupiah)
+  occupancyRate: 78.5, // Tingkat Hunian (%)
+  averageRating: 4.6, // Rata-rata Rating
+  pendingBookings: 12, // Pemesanan Menunggu
+  confirmedBookings: 89, // Pemesanan Terkonfirmasi
   monthlyRevenue: [
-    { month: 'Jan', revenue: 45000 },
-    { month: 'Feb', revenue: 52000 },
-    { month: 'Mar', revenue: 48000 },
-    { month: 'Apr', revenue: 61000 },
-    { month: 'May', revenue: 58000 },
-    { month: 'Jun', revenue: 65000 }
+    { month: 'Jan', revenue: 45000000 }, // Jan, Pendapatan: 45.000.000
+    { month: 'Feb', revenue: 52000000 }, // Feb, Pendapatan: 52.000.000
+    { month: 'Mar', revenue: 48000000 }, // Mar, Pendapatan: 48.000.000
+    { month: 'Apr', revenue: 61000000 }, // Apr, Pendapatan: 61.000.000
+    { month: 'Mei', revenue: 58000000 }, // Mei, Pendapatan: 58.000.000
+    { month: 'Jun', revenue: 65000000 }  // Jun, Pendapatan: 65.000.000
   ],
   roomTypeBookings: [
-    { type: 'Standard', count: 45 },
-    { type: 'Deluxe', count: 38 },
-    { type: 'Suite', count: 25 },
-    { type: 'Presidential', count: 8 }
+    { type: 'Standar', count: 45 }, // Tipe Standar, 45 pemesanan
+    { type: 'Deluxe', count: 38 },   // Tipe Deluxe, 38 pemesanan
+    { type: 'Suite', count: 25 },    // Tipe Suite, 25 pemesanan
+    { type: 'Presidential', count: 8 } // Tipe Presidential, 8 pemesanan
   ]
 };

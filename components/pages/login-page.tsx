@@ -25,8 +25,8 @@ export default function LoginPage() {
     
     if (!email || !password) {
       toast({
-        title: "Error",
-        description: "Please fill in all fields",
+        title: "Kesalahan",
+        description: "Silakan isi semua kolom",
         variant: "destructive",
       });
       return;
@@ -36,14 +36,14 @@ export default function LoginPage() {
     
     if (success) {
       toast({
-        title: "Success",
-        description: "Welcome back!",
+        title: "Berhasil",
+        description: "Selamat datang kembali!",
       });
       router.push('/');
     } else {
       toast({
-        title: "Error",
-        description: "Invalid email or password",
+        title: "Kesalahan",
+        description: "Email atau kata sandi salah",
         variant: "destructive",
       });
     }
@@ -64,15 +64,15 @@ export default function LoginPage() {
               LuxeStay
             </span>
           </Link>
-          <h1 className="text-2xl font-bold">Welcome Back</h1>
-          <p className="text-muted-foreground">Sign in to your account to continue</p>
+          <h1 className="text-2xl font-bold">Selamat Datang Kembali</h1>
+          <p className="text-muted-foreground">Masuk ke akun Anda untuk melanjutkan</p>
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle>Sign In</CardTitle>
+            <CardTitle>Masuk</CardTitle>
             <CardDescription>
-              Enter your credentials to access your account
+              Masukkan email dan kata sandi untuk mengakses akun Anda
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -86,7 +86,7 @@ export default function LoginPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
+                    placeholder="Masukkan email Anda"
                     className="pl-10"
                     disabled={loading}
                   />
@@ -94,7 +94,7 @@ export default function LoginPage() {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Kata Sandi</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -102,7 +102,7 @@ export default function LoginPage() {
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
+                    placeholder="Masukkan kata sandi Anda"
                     className="pl-10 pr-10"
                     disabled={loading}
                   />
@@ -127,24 +127,24 @@ export default function LoginPage() {
                 className="w-full" 
                 disabled={loading}
               >
-                {loading ? "Signing in..." : "Sign In"}
+                {loading ? "Sedang masuk..." : "Masuk"}
               </Button>
             </form>
 
             <div className="mt-6 text-center text-sm">
               <p className="text-muted-foreground">
-                Don't have an account?{' '}
+                Belum punya akun?{' '}
                 <Link href="/register" className="text-primary hover:underline">
-                  Sign up
+                  Daftar
                 </Link>
               </p>
             </div>
 
             {/* Demo accounts info */}
             <div className="mt-6 p-4 bg-muted/50 rounded-lg">
-              <p className="text-sm font-medium mb-2">Demo Accounts:</p>
+              <p className="text-sm font-medium mb-2">Akun Demo:</p>
               <div className="text-xs space-y-1">
-                <p><strong>Customer:</strong> john.smith@email.com / password</p>
+                <p><strong>Pelanggan:</strong> john.smith@email.com / password</p>
                 <p><strong>Admin:</strong> admin@luxestay.com / admin123</p>
               </div>
             </div>
