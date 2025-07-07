@@ -28,7 +28,7 @@ export default function RoomDetailPage({ params }: { params: { slug: string } })
         <div className="container mx-auto px-4 py-10">
           <RoomHeader room={room} />
           <div className="flex flex-col md:flex-row gap-10">
-            <RoomGallery images={room.images} name={room.name} />
+            {room.images && <RoomGallery images={room.images} name={room.name} />}
             <RoomInfo room={room} />
           </div>
         </div>

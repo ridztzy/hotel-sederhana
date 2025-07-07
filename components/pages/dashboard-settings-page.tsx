@@ -29,26 +29,26 @@ import {
   MapPin
 } from 'lucide-react';
 
-export default function DashboardSettingsPage() {
+export default function HalamanPengaturanDasbor() {
   const { user, isAuthenticated, isAdmin, loading } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
 
-  // All useState hooks must be called unconditionally at the top level
-  const [hotelSettings, setHotelSettings] = useState({
-    name: 'LuxeStay Hotel',
-    description: 'Experience luxury and comfort at LuxeStay. Your perfect getaway awaits with world-class amenities and exceptional service.',
-    address: '123 Luxury Avenue, Downtown, NY 10001',
-    phone: '+1 (555) 123-4567',
-    email: 'info@luxestay.com',
-    website: 'https://luxestay.com',
-    checkInTime: '15:00',
-    checkOutTime: '11:00',
-    currency: 'USD',
-    timezone: 'America/New_York'
+  // Semua hook useState harus dipanggil tanpa syarat di tingkat atas
+  const [pengaturanHotel, setPengaturanHotel] = useState({
+    name: 'Hotel Mewah Jaya',
+    description: 'Rasakan kemewahan dan kenyamanan di Hotel Mewah Jaya. Liburan sempurna Anda menanti dengan fasilitas kelas dunia dan layanan luar biasa.',
+    address: 'Jl. Jenderal Sudirman No. 123, Jakarta Pusat, 10220',
+    phone: '+62 (21) 555-1234',
+    email: 'info@hotelmewahjaya.com',
+    website: 'https://hotelmewahjaya.com',
+    checkInTime: '14:00',
+    checkOutTime: '12:00',
+    currency: 'IDR',
+    timezone: 'Asia/Jakarta'
   });
 
-  const [notificationSettings, setNotificationSettings] = useState({
+  const [pengaturanNotifikasi, setPengaturanNotifikasi] = useState({
     emailBookings: true,
     emailCancellations: true,
     emailPayments: true,
@@ -57,68 +57,68 @@ export default function DashboardSettingsPage() {
     pushNotifications: true
   });
 
-  const [securitySettings, setSecuritySettings] = useState({
+  const [pengaturanKeamanan, setPengaturanKeamanan] = useState({
     twoFactorAuth: false,
     sessionTimeout: '24',
     passwordExpiry: '90',
     loginAttempts: '5'
   });
 
-  const [appearanceSettings, setAppearanceSettings] = useState({
+  const [pengaturanTampilan, setPengaturanTampilan] = useState({
     theme: 'system',
     primaryColor: 'blue',
-    language: 'en'
+    language: 'id'
   });
 
-  // Handle authentication check in useEffect to avoid SSR issues
+  // Menangani pemeriksaan otentikasi di useEffect untuk menghindari masalah SSR
   useEffect(() => {
     if (!loading && (!isAuthenticated || !isAdmin)) {
       router.push('/login');
     }
   }, [isAuthenticated, isAdmin, loading, router]);
 
-  const handleSaveHotelSettings = () => {
-    // Mock save functionality
+  const handleSimpanPengaturanHotel = () => {
+    // Fungsionalitas simpan tiruan
     toast({
-      title: "Settings Saved",
-      description: "Hotel settings have been updated successfully.",
+      title: "Pengaturan Disimpan",
+      description: "Pengaturan hotel telah berhasil diperbarui.",
     });
   };
 
-  const handleSaveNotifications = () => {
+  const handleSimpanNotifikasi = () => {
     toast({
-      title: "Notifications Updated",
-      description: "Notification preferences have been saved.",
+      title: "Notifikasi Diperbarui",
+      description: "Preferensi notifikasi telah disimpan.",
     });
   };
 
-  const handleSaveSecurity = () => {
+  const handleSimpanKeamanan = () => {
     toast({
-      title: "Security Settings Updated",
-      description: "Security preferences have been saved.",
+      title: "Pengaturan Keamanan Diperbarui",
+      description: "Preferensi keamanan telah disimpan.",
     });
   };
 
-  const handleSaveAppearance = () => {
+  const handleSimpanTampilan = () => {
     toast({
-      title: "Appearance Updated",
-      description: "Appearance settings have been saved.",
+      title: "Tampilan Diperbarui",
+      description: "Pengaturan tampilan telah disimpan.",
     });
   };
 
-  // Show loading state while authentication is being checked
+  // Tampilkan status memuat saat otentikasi sedang diperiksa
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Loading...</p>
+          <p className="mt-4 text-muted-foreground">Memuat...</p>
         </div>
       </div>
     );
   }
 
-  // Don't render content if not authenticated or not admin
+  // Jangan render konten jika tidak terotentikasi atau bukan admin
   if (!isAuthenticated || !isAdmin) {
     return null;
   }
@@ -135,76 +135,76 @@ export default function DashboardSettingsPage() {
         >
           <div className="flex items-center space-x-2 mb-8">
             <Settings className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold">Settings</h1>
+            <h1 className="text-3xl font-bold">Pengaturan</h1>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Settings Navigation */}
+            {/* Navigasi Pengaturan */}
             <div className="lg:col-span-1">
               <Card>
                 <CardHeader>
-                  <CardTitle>Settings Categories</CardTitle>
+                  <CardTitle>Kategori Pengaturan</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
                   <Button variant="ghost" className="w-full justify-start">
                     <Building className="mr-2 h-4 w-4" />
-                    Hotel Information
+                    Informasi Hotel
                   </Button>
                   <Button variant="ghost" className="w-full justify-start">
                     <Bell className="mr-2 h-4 w-4" />
-                    Notifications
+                    Notifikasi
                   </Button>
                   <Button variant="ghost" className="w-full justify-start">
                     <Shield className="mr-2 h-4 w-4" />
-                    Security
+                    Keamanan
                   </Button>
                   <Button variant="ghost" className="w-full justify-start">
                     <Palette className="mr-2 h-4 w-4" />
-                    Appearance
+                    Tampilan
                   </Button>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Settings Content */}
+            {/* Konten Pengaturan */}
             <div className="lg:col-span-2 space-y-8">
-              {/* Hotel Information */}
+              {/* Informasi Hotel */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Building className="h-5 w-5" />
-                    <span>Hotel Information</span>
+                    <span>Informasi Hotel</span>
                   </CardTitle>
                   <CardDescription>
-                    Manage your hotel's basic information and contact details
+                    Kelola informasi dasar dan detail kontak hotel Anda
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="hotelName">Hotel Name</Label>
+                      <Label htmlFor="hotelName">Nama Hotel</Label>
                       <Input
                         id="hotelName"
-                        value={hotelSettings.name}
-                        onChange={(e) => setHotelSettings({...hotelSettings, name: e.target.value})}
+                        value={pengaturanHotel.name}
+                        onChange={(e) => setPengaturanHotel({...pengaturanHotel, name: e.target.value})}
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="website">Website</Label>
+                      <Label htmlFor="website">Situs Web</Label>
                       <Input
                         id="website"
-                        value={hotelSettings.website}
-                        onChange={(e) => setHotelSettings({...hotelSettings, website: e.target.value})}
+                        value={pengaturanHotel.website}
+                        onChange={(e) => setPengaturanHotel({...pengaturanHotel, website: e.target.value})}
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="description">Description</Label>
+                    <Label htmlFor="description">Deskripsi</Label>
                     <Textarea
                       id="description"
-                      value={hotelSettings.description}
-                      onChange={(e) => setHotelSettings({...hotelSettings, description: e.target.value})}
+                      value={pengaturanHotel.description}
+                      onChange={(e) => setPengaturanHotel({...pengaturanHotel, description: e.target.value})}
                       rows={3}
                     />
                   </div>
@@ -217,64 +217,65 @@ export default function DashboardSettingsPage() {
                         <Input
                           id="email"
                           className="pl-10"
-                          value={hotelSettings.email}
-                          onChange={(e) => setHotelSettings({...hotelSettings, email: e.target.value})}
+                          value={pengaturanHotel.email}
+                          onChange={(e) => setPengaturanHotel({...pengaturanHotel, email: e.target.value})}
                         />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Phone</Label>
+                      <Label htmlFor="phone">Telepon</Label>
                       <div className="relative">
                         <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           id="phone"
                           className="pl-10"
-                          value={hotelSettings.phone}
-                          onChange={(e) => setHotelSettings({...hotelSettings, phone: e.target.value})}
+                          value={pengaturanHotel.phone}
+                          onChange={(e) => setPengaturanHotel({...pengaturanHotel, phone: e.target.value})}
                         />
                       </div>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="address">Address</Label>
+                    <Label htmlFor="address">Alamat</Label>
                     <div className="relative">
                       <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="address"
                         className="pl-10"
-                        value={hotelSettings.address}
-                        onChange={(e) => setHotelSettings({...hotelSettings, address: e.target.value})}
+                        value={pengaturanHotel.address}
+                        onChange={(e) => setPengaturanHotel({...pengaturanHotel, address: e.target.value})}
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="checkIn">Check-in Time</Label>
+                      <Label htmlFor="checkIn">Waktu Check-in</Label>
                       <Input
                         id="checkIn"
                         type="time"
-                        value={hotelSettings.checkInTime}
-                        onChange={(e) => setHotelSettings({...hotelSettings, checkInTime: e.target.value})}
+                        value={pengaturanHotel.checkInTime}
+                        onChange={(e) => setPengaturanHotel({...pengaturanHotel, checkInTime: e.target.value})}
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="checkOut">Check-out Time</Label>
+                      <Label htmlFor="checkOut">Waktu Check-out</Label>
                       <Input
                         id="checkOut"
                         type="time"
-                        value={hotelSettings.checkOutTime}
-                        onChange={(e) => setHotelSettings({...hotelSettings, checkOutTime: e.target.value})}
+                        value={pengaturanHotel.checkOutTime}
+                        onChange={(e) => setPengaturanHotel({...pengaturanHotel, checkOutTime: e.target.value})}
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="currency">Currency</Label>
-                      <Select value={hotelSettings.currency} onValueChange={(value) => setHotelSettings({...hotelSettings, currency: value})}>
+                      <Label htmlFor="currency">Mata Uang</Label>
+                      <Select value={pengaturanHotel.currency} onValueChange={(value) => setPengaturanHotel({...pengaturanHotel, currency: value})}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="IDR">IDR (Rp)</SelectItem>
                           <SelectItem value="USD">USD ($)</SelectItem>
                           <SelectItem value="EUR">EUR (€)</SelectItem>
                           <SelectItem value="GBP">GBP (£)</SelectItem>
@@ -283,65 +284,64 @@ export default function DashboardSettingsPage() {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="timezone">Timezone</Label>
-                      <Select value={hotelSettings.timezone} onValueChange={(value) => setHotelSettings({...hotelSettings, timezone: value})}>
+                      <Label htmlFor="timezone">Zona Waktu</Label>
+                      <Select value={pengaturanHotel.timezone} onValueChange={(value) => setPengaturanHotel({...pengaturanHotel, timezone: value})}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="America/New_York">Eastern Time</SelectItem>
-                          <SelectItem value="America/Chicago">Central Time</SelectItem>
-                          <SelectItem value="America/Denver">Mountain Time</SelectItem>
-                          <SelectItem value="America/Los_Angeles">Pacific Time</SelectItem>
+                          <SelectItem value="Asia/Jakarta">WIB (Jakarta)</SelectItem>
+                          <SelectItem value="Asia/Makassar">WITA (Makassar)</SelectItem>
+                          <SelectItem value="Asia/Jayapura">WIT (Jayapura)</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
-                  <Button onClick={handleSaveHotelSettings} className="w-full md:w-auto">
+                  <Button onClick={handleSimpanPengaturanHotel} className="w-full md:w-auto">
                     <Save className="mr-2 h-4 w-4" />
-                    Save Hotel Information
+                    Simpan Informasi Hotel
                   </Button>
                 </CardContent>
               </Card>
 
-              {/* Notifications */}
+              {/* Notifikasi */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Bell className="h-5 w-5" />
-                    <span>Notification Preferences</span>
+                    <span>Preferensi Notifikasi</span>
                   </CardTitle>
                   <CardDescription>
-                    Configure how you want to receive notifications
+                    Konfigurasikan bagaimana Anda ingin menerima notifikasi
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="space-y-4">
-                    <h4 className="font-medium">Email Notifications</h4>
+                    <h4 className="font-medium">Notifikasi Email</h4>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="emailBookings">New Bookings</Label>
+                        <Label htmlFor="emailBookings">Pemesanan Baru</Label>
                         <Switch
                           id="emailBookings"
-                          checked={notificationSettings.emailBookings}
-                          onCheckedChange={(checked) => setNotificationSettings({...notificationSettings, emailBookings: checked})}
+                          checked={pengaturanNotifikasi.emailBookings}
+                          onCheckedChange={(checked) => setPengaturanNotifikasi({...pengaturanNotifikasi, emailBookings: checked})}
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="emailCancellations">Cancellations</Label>
+                        <Label htmlFor="emailCancellations">Pembatalan</Label>
                         <Switch
                           id="emailCancellations"
-                          checked={notificationSettings.emailCancellations}
-                          onCheckedChange={(checked) => setNotificationSettings({...notificationSettings, emailCancellations: checked})}
+                          checked={pengaturanNotifikasi.emailCancellations}
+                          onCheckedChange={(checked) => setPengaturanNotifikasi({...pengaturanNotifikasi, emailCancellations: checked})}
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="emailPayments">Payment Updates</Label>
+                        <Label htmlFor="emailPayments">Pembaruan Pembayaran</Label>
                         <Switch
                           id="emailPayments"
-                          checked={notificationSettings.emailPayments}
-                          onCheckedChange={(checked) => setNotificationSettings({...notificationSettings, emailPayments: checked})}
+                          checked={pengaturanNotifikasi.emailPayments}
+                          onCheckedChange={(checked) => setPengaturanNotifikasi({...pengaturanNotifikasi, emailPayments: checked})}
                         />
                       </div>
                     </div>
@@ -350,22 +350,22 @@ export default function DashboardSettingsPage() {
                   <Separator />
 
                   <div className="space-y-4">
-                    <h4 className="font-medium">SMS Notifications</h4>
+                    <h4 className="font-medium">Notifikasi SMS</h4>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="smsBookings">New Bookings</Label>
+                        <Label htmlFor="smsBookings">Pemesanan Baru</Label>
                         <Switch
                           id="smsBookings"
-                          checked={notificationSettings.smsBookings}
-                          onCheckedChange={(checked) => setNotificationSettings({...notificationSettings, smsBookings: checked})}
+                          checked={pengaturanNotifikasi.smsBookings}
+                          onCheckedChange={(checked) => setPengaturanNotifikasi({...pengaturanNotifikasi, smsBookings: checked})}
                         />
                       </div>
                       <div className="flex items-center justify-between">
-                        <Label htmlFor="smsReminders">Check-in Reminders</Label>
+                        <Label htmlFor="smsReminders">Pengingat Check-in</Label>
                         <Switch
                           id="smsReminders"
-                          checked={notificationSettings.smsReminders}
-                          onCheckedChange={(checked) => setNotificationSettings({...notificationSettings, smsReminders: checked})}
+                          checked={pengaturanNotifikasi.smsReminders}
+                          onCheckedChange={(checked) => setPengaturanNotifikasi({...pengaturanNotifikasi, smsReminders: checked})}
                         />
                       </div>
                     </div>
@@ -374,158 +374,159 @@ export default function DashboardSettingsPage() {
                   <Separator />
 
                   <div className="space-y-4">
-                    <h4 className="font-medium">Push Notifications</h4>
+                    <h4 className="font-medium">Notifikasi Push</h4>
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="pushNotifications">Browser Notifications</Label>
+                      <Label htmlFor="pushNotifications">Notifikasi Browser</Label>
                       <Switch
                         id="pushNotifications"
-                        checked={notificationSettings.pushNotifications}
-                        onCheckedChange={(checked) => setNotificationSettings({...notificationSettings, pushNotifications: checked})}
+                        checked={pengaturanNotifikasi.pushNotifications}
+                        onCheckedChange={(checked) => setPengaturanNotifikasi({...pengaturanNotifikasi, pushNotifications: checked})}
                       />
                     </div>
                   </div>
 
-                  <Button onClick={handleSaveNotifications} className="w-full md:w-auto">
+                  <Button onClick={handleSimpanNotifikasi} className="w-full md:w-auto">
                     <Save className="mr-2 h-4 w-4" />
-                    Save Notification Settings
+                    Simpan Pengaturan Notifikasi
                   </Button>
                 </CardContent>
               </Card>
 
-              {/* Security */}
+              {/* Keamanan */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Shield className="h-5 w-5" />
-                    <span>Security Settings</span>
+                    <span>Pengaturan Keamanan</span>
                   </CardTitle>
                   <CardDescription>
-                    Manage security and access control settings
+                    Kelola pengaturan keamanan dan kontrol akses
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <Label htmlFor="twoFactor">Two-Factor Authentication</Label>
-                      <p className="text-sm text-muted-foreground">Add an extra layer of security to your account</p>
+                      <Label htmlFor="twoFactor">Autentikasi Dua Faktor</Label>
+                      <p className="text-sm text-muted-foreground">Tambahkan lapisan keamanan ekstra ke akun Anda</p>
                     </div>
                     <Switch
                       id="twoFactor"
-                      checked={securitySettings.twoFactorAuth}
-                      onCheckedChange={(checked) => setSecuritySettings({...securitySettings, twoFactorAuth: checked})}
+                      checked={pengaturanKeamanan.twoFactorAuth}
+                      onCheckedChange={(checked) => setPengaturanKeamanan({...pengaturanKeamanan, twoFactorAuth: checked})}
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="sessionTimeout">Session Timeout (hours)</Label>
-                      <Select value={securitySettings.sessionTimeout} onValueChange={(value) => setSecuritySettings({...securitySettings, sessionTimeout: value})}>
+                      <Label htmlFor="sessionTimeout">Batas Waktu Sesi (jam)</Label>
+                      <Select value={pengaturanKeamanan.sessionTimeout} onValueChange={(value) => setPengaturanKeamanan({...pengaturanKeamanan, sessionTimeout: value})}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="1">1 hour</SelectItem>
-                          <SelectItem value="8">8 hours</SelectItem>
-                          <SelectItem value="24">24 hours</SelectItem>
-                          <SelectItem value="168">1 week</SelectItem>
+                          <SelectItem value="1">1 jam</SelectItem>
+                          <SelectItem value="8">8 jam</SelectItem>
+                          <SelectItem value="24">24 jam</SelectItem>
+                          <SelectItem value="168">1 minggu</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="passwordExpiry">Password Expiry (days)</Label>
-                      <Select value={securitySettings.passwordExpiry} onValueChange={(value) => setSecuritySettings({...securitySettings, passwordExpiry: value})}>
+                      <Label htmlFor="passwordExpiry">Kadaluarsa Kata Sandi (hari)</Label>
+                      <Select value={pengaturanKeamanan.passwordExpiry} onValueChange={(value) => setPengaturanKeamanan({...pengaturanKeamanan, passwordExpiry: value})}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="30">30 days</SelectItem>
-                          <SelectItem value="60">60 days</SelectItem>
-                          <SelectItem value="90">90 days</SelectItem>
-                          <SelectItem value="never">Never</SelectItem>
+                          <SelectItem value="30">30 hari</SelectItem>
+                          <SelectItem value="60">60 hari</SelectItem>
+                          <SelectItem value="90">90 hari</SelectItem>
+                          <SelectItem value="never">Tidak Pernah</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="loginAttempts">Max Login Attempts</Label>
-                      <Select value={securitySettings.loginAttempts} onValueChange={(value) => setSecuritySettings({...securitySettings, loginAttempts: value})}>
+                      <Label htmlFor="loginAttempts">Maksimal Upaya Login</Label>
+                      <Select value={pengaturanKeamanan.loginAttempts} onValueChange={(value) => setPengaturanKeamanan({...pengaturanKeamanan, loginAttempts: value})}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="3">3 attempts</SelectItem>
-                          <SelectItem value="5">5 attempts</SelectItem>
-                          <SelectItem value="10">10 attempts</SelectItem>
+                          <SelectItem value="3">3 percobaan</SelectItem>
+                          <SelectItem value="5">5 percobaan</SelectItem>
+                          <SelectItem value="10">10 percobaan</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
-                  <Button onClick={handleSaveSecurity} className="w-full md:w-auto">
+                  <Button onClick={handleSimpanKeamanan} className="w-full md:w-auto">
                     <Save className="mr-2 h-4 w-4" />
-                    Save Security Settings
+                    Simpan Pengaturan Keamanan
                   </Button>
                 </CardContent>
               </Card>
 
-              {/* Appearance */}
+              {/* Tampilan */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
                     <Palette className="h-5 w-5" />
-                    <span>Appearance & Localization</span>
+                    <span>Tampilan & Lokalisasi</span>
                   </CardTitle>
                   <CardDescription>
-                    Customize the look and feel of your dashboard
+                    Sesuaikan tampilan dan nuansa dasbor Anda
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="theme">Theme</Label>
-                      <Select value={appearanceSettings.theme} onValueChange={(value) => setAppearanceSettings({...appearanceSettings, theme: value})}>
+                      <Label htmlFor="theme">Tema</Label>
+                      <Select value={pengaturanTampilan.theme} onValueChange={(value) => setPengaturanTampilan({...pengaturanTampilan, theme: value})}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="light">Light</SelectItem>
-                          <SelectItem value="dark">Dark</SelectItem>
-                          <SelectItem value="system">System</SelectItem>
+                          <SelectItem value="light">Terang</SelectItem>
+                          <SelectItem value="dark">Gelap</SelectItem>
+                          <SelectItem value="system">Sistem</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="primaryColor">Primary Color</Label>
-                      <Select value={appearanceSettings.primaryColor} onValueChange={(value) => setAppearanceSettings({...appearanceSettings, primaryColor: value})}>
+                      <Label htmlFor="primaryColor">Warna Utama</Label>
+                      <Select value={pengaturanTampilan.primaryColor} onValueChange={(value) => setPengaturanTampilan({...pengaturanTampilan, primaryColor: value})}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="blue">Blue</SelectItem>
-                          <SelectItem value="green">Green</SelectItem>
-                          <SelectItem value="purple">Purple</SelectItem>
-                          <SelectItem value="red">Red</SelectItem>
+                          <SelectItem value="blue">Biru</SelectItem>
+                          <SelectItem value="green">Hijau</SelectItem>
+                          <SelectItem value="purple">Ungu</SelectItem>
+                          <SelectItem value="red">Merah</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="language">Language</Label>
-                      <Select value={appearanceSettings.language} onValueChange={(value) => setAppearanceSettings({...appearanceSettings, language: value})}>
+                      <Label htmlFor="language">Bahasa</Label>
+                      <Select value={pengaturanTampilan.language} onValueChange={(value) => setPengaturanTampilan({...pengaturanTampilan, language: value})}>
                         <SelectTrigger>
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="en">English</SelectItem>
-                          <SelectItem value="es">Spanish</SelectItem>
-                          <SelectItem value="fr">French</SelectItem>
-                          <SelectItem value="de">German</SelectItem>
+                          <SelectItem value="id">Bahasa Indonesia</SelectItem>
+                          <SelectItem value="en">Inggris</SelectItem>
+                          <SelectItem value="es">Spanyol</SelectItem>
+                          <SelectItem value="fr">Prancis</SelectItem>
+                          <SelectItem value="de">Jerman</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
-                  <Button onClick={handleSaveAppearance} className="w-full md:w-auto">
+                  <Button onClick={handleSimpanTampilan} className="w-full md:w-auto">
                     <Save className="mr-2 h-4 w-4" />
-                    Save Appearance Settings
+                    Simpan Pengaturan Tampilan
                   </Button>
                 </CardContent>
               </Card>

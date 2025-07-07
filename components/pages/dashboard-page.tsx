@@ -17,7 +17,9 @@ import {
   TrendingUp, 
   Hotel,
   ClipboardList,
-  Settings
+  Settings,
+  BedDouble,
+  Plus
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -33,8 +35,8 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-amber-500"></div>
       </div>
     );
   }
@@ -45,53 +47,60 @@ export default function DashboardPage() {
 
   const stats = [
     {
-      title: 'Total Bookings',
+      title: 'Total Pemesanan',
       value: mockStats.totalBookings,
       icon: Calendar,
-      description: 'All time bookings',
+      description: 'Total pemesanan sepanjang waktu',
       trend: '+12%'
     },
     {
-      title: 'Total Revenue',
-      value: `$${mockStats.totalRevenue.toLocaleString()}`,
+      title: 'Total Pendapatan',
+      value: `Rp${mockStats.totalRevenue.toLocaleString("id-ID")}`,
       icon: DollarSign,
-      description: 'Total earnings',
+      description: 'Total pendapatan',
       trend: '+8%'
     },
     {
-      title: 'Occupancy Rate',
+      title: 'Tingkat Hunian',
       value: `${mockStats.occupancyRate}%`,
       icon: Users,
-      description: 'Current occupancy',
+      description: 'Tingkat hunian saat ini',
       trend: '+5%'
     },
     {
-      title: 'Average Rating',
+      title: 'Rata-rata Rating',
       value: mockStats.averageRating,
       icon: Star,
-      description: 'Guest satisfaction',
+      description: 'Kepuasan tamu',
       trend: '+0.2'
     }
   ];
 
   const quickActions = [
     {
-      title: 'Manage Rooms',
-      description: 'Add, edit, or remove room listings',
+      title: 'Kelola Kamar',
+      description: 'Tambah, edit, atau hapus data kamar',
       icon: Hotel,
       href: '/dashboard/rooms',
       color: 'bg-blue-500'
     },
     {
-      title: 'View Bookings',
-      description: 'Manage customer reservations',
+      title: 'Kelola Data',
+      description: 'Kelola kategori kamar & harga',
+      icon: BedDouble,
+      href: '/dashboard/room-types',
+      color: 'bg-amber-500'
+    },
+    {
+      title: 'Lihat Pemesanan',
+      description: 'Kelola reservasi pelanggan',
       icon: ClipboardList,
       href: '/dashboard/bookings',
       color: 'bg-emerald-500'
     },
     {
-      title: 'Settings',
-      description: 'Configure system settings',
+      title: 'Pengaturan',
+      description: 'Konfigurasi sistem',
       icon: Settings,
       href: '/dashboard/settings',
       color: 'bg-purple-500'
@@ -99,7 +108,7 @@ export default function DashboardPage() {
   ];
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       <div className="container mx-auto px-4 py-8">
@@ -109,9 +118,9 @@ export default function DashboardPage() {
           transition={{ duration: 0.5 }}
         >
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+            <h1 className="text-3xl font-bold mb-2">Dasbor Admin</h1>
             <p className="text-muted-foreground">
-              Welcome back, {user?.name}. Here's what's happening at LuxeStay.
+              Selamat datang kembali, <span className="text-amber-600 font-medium">{user?.name}</span>. Berikut ringkasan aktivitas di LuxeStay.
             </p>
           </div>
 
@@ -124,7 +133,7 @@ export default function DashboardPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card>
+                <Card className="hover:shadow-md transition-shadow">
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
                       {stat.title}
@@ -148,8 +157,11 @@ export default function DashboardPage() {
 
           {/* Quick Actions */}
           <div className="mb-8">
-            <h2 className="text-2xl font-bold mb-4">Quick Actions</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-2xl font-bold">Aksi Cepat</h2>
+              
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {quickActions.map((action, index) => (
                 <motion.div
                   key={action.title}
@@ -157,25 +169,25 @@ export default function DashboardPage() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                 >
-                  <Card className="hover:shadow-lg transition-shadow cursor-pointer">
-                    <CardHeader>
-                      <div className="flex items-center space-x-4">
-                        <div className={`p-2 rounded-lg ${action.color}`}>
-                          <action.icon className="h-6 w-6 text-white" />
+                  <Card className="hover:shadow-lg transition-shadow">
+                    <Link href={action.href}>
+                      <CardHeader>
+                        <div className="flex items-center space-x-4">
+                          <div className={`p-3 rounded-lg ${action.color}`}>
+                            <action.icon className="h-5 w-5 text-white" />
+                          </div>
+                          <div>
+                            <CardTitle className="text-lg">{action.title}</CardTitle>
+                            <CardDescription>{action.description}</CardDescription>
+                          </div>
                         </div>
-                        <div>
-                          <CardTitle className="text-lg">{action.title}</CardTitle>
-                          <CardDescription>{action.description}</CardDescription>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <Button asChild className="w-full">
-                        <Link href={action.href}>
-                          Go to {action.title}
-                        </Link>
-                      </Button>
-                    </CardContent>
+                      </CardHeader>
+                      <CardContent>
+                        <Button className="w-full" variant="outline">
+                          Kelola
+                        </Button>
+                      </CardContent>
+                    </Link>
                   </Card>
                 </motion.div>
               ))}
@@ -186,64 +198,67 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle>Recent Bookings</CardTitle>
-                <CardDescription>Latest customer reservations</CardDescription>
+                <CardTitle>Pemesanan Terbaru</CardTitle>
+                <CardDescription>Reservasi pelanggan terbaru</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                    <div>
-                      <p className="font-medium">Presidential Suite</p>
-                      <p className="text-sm text-muted-foreground">John Smith</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-medium">$2,500</p>
-                      <p className="text-sm text-muted-foreground">Jan 15-18</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
-                    <div>
-                      <p className="font-medium">Luxury Suite</p>
-                      <p className="text-sm text-muted-foreground">Michael Brown</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-medium">$1,200</p>
-                      <p className="text-sm text-muted-foreground">Jan 25-28</p>
-                    </div>
-                  </div>
+                  {[
+                    { room: 'Presidential Suite', guest: 'John Smith', price: 'Rp2.500.000', date: '15-18 Jan' },
+                    { room: 'Luxury Suite', guest: 'Michael Brown', price: 'Rp1.200.000', date: '25-28 Jan' },
+                    { room: 'Deluxe Room', guest: 'Sarah Johnson', price: 'Rp850.000', date: '2-5 Feb' }
+                  ].map((booking, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center justify-between p-3 bg-muted/50 rounded-lg hover:bg-muted/70 transition-colors"
+                    >
+                      <div>
+                        <p className="font-medium">{booking.room}</p>
+                        <p className="text-sm text-muted-foreground">{booking.guest}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium">{booking.price}</p>
+                        <p className="text-sm text-muted-foreground">{booking.date}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
                 <Button variant="outline" className="w-full mt-4" asChild>
-                  <Link href="/dashboard/bookings">View All Bookings</Link>
+                  <Link href="/dashboard/bookings">Lihat Semua Pemesanan</Link>
                 </Button>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Room Status</CardTitle>
-                <CardDescription>Current room availability</CardDescription>
+                <CardTitle>Status Kamar</CardTitle>
+                <CardDescription>Ketersediaan kamar saat ini</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span>Total Rooms</span>
-                    <span className="font-medium">6</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Available</span>
-                    <span className="font-medium text-emerald-600">5</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Occupied</span>
-                    <span className="font-medium text-blue-600">1</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span>Maintenance</span>
-                    <span className="font-medium text-orange-600">0</span>
-                  </div>
+                  {[
+                    { label: 'Total Kamar', value: '6', color: 'text-foreground' },
+                    { label: 'Tersedia', value: '5', color: 'text-emerald-600' },
+                    { label: 'Terisi', value: '1', color: 'text-blue-600' },
+                    { label: 'Perawatan', value: '0', color: 'text-orange-600' }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item.label}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-center justify-between p-3 hover:bg-muted/50 rounded-lg transition-colors"
+                    >
+                      <span>{item.label}</span>
+                      <span className={`font-medium ${item.color}`}>{item.value}</span>
+                    </motion.div>
+                  ))}
                 </div>
                 <Button variant="outline" className="w-full mt-4" asChild>
-                  <Link href="/dashboard/rooms">Manage Rooms</Link>
+                  <Link href="/dashboard/rooms">Kelola Kamar</Link>
                 </Button>
               </CardContent>
             </Card>

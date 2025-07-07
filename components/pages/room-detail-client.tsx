@@ -44,16 +44,17 @@ export default function RoomDetailClient() {
   const [showBookingDialog, setShowBookingDialog] = useState(false);
   const [isBooking, setIsBooking] = useState(false);
 
-  useEffect(() => {
-    if (params.slug) {
-      const foundRoom = mockRooms.find(r => r.slug === params.slug);
-      if (foundRoom) {
-        setRoom(foundRoom);
-      } else {
-        router.push('/rooms');
-      }
+useEffect(() => {
+  // Pastikan params ada dan slug adalah string
+  if (params && typeof params.slug === 'string') {
+    const foundRoom = mockRooms.find(r => r.slug === params.slug);
+    if (foundRoom) {
+      setRoom(foundRoom);
+    } else {
+      router.push('/rooms');
     }
-  }, [params.slug, router]);
+  }
+}, [params, router]);
 
   const handleBooking = async () => {
     if (!isAuthenticated) {

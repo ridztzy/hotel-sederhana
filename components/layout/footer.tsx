@@ -9,8 +9,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
-              <Hotel className="h-8 w-8 text-primary" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+              <Hotel className="h-8 w-8 text-amber-600" />
+              <span className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent">
                 LuxeStay
               </span>
             </Link>
@@ -18,16 +18,16 @@ export default function Footer() {
               Nikmati kemewahan dan kenyamanan di LuxeStay. Liburan sempurna Anda menanti dengan fasilitas kelas dunia dan layanan istimewa.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="#" className="text-muted-foreground hover:text-amber-600 transition-colors">
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="#" className="text-muted-foreground hover:text-amber-600 transition-colors">
                 <Twitter className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="#" className="text-muted-foreground hover:text-amber-600 transition-colors">
                 <Instagram className="h-5 w-5" />
               </Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="#" className="text-muted-foreground hover:text-amber-600 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </Link>
             </div>
@@ -102,19 +102,19 @@ export default function Footer() {
             <h3 className="text-lg font-semibold">Kontak</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <MapPin className="h-4 w-4 text-primary" />
+                <MapPin className="h-4 w-4 text-amber-600" />
                 <span className="text-sm text-muted-foreground">
                   Jl. Kemewahan 123, Pusat Kota, Jakarta 10001
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-4 w-4 text-primary" />
+                <Phone className="h-4 w-4 text-amber-600" />
                 <span className="text-sm text-muted-foreground">
                   +62 (21) 1234-5678
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-4 w-4 text-primary" />
+                <Mail className="h-4 w-4 text-amber-600" />
                 <span className="text-sm text-muted-foreground">
                   info@luxestay.com
                 </span>

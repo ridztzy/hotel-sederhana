@@ -32,7 +32,7 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-export default function DashboardBookingsPage() {
+export default function HalamanDasborPemesanan() {
   const { user, isAuthenticated, isAdmin, loading } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
@@ -56,7 +56,7 @@ export default function DashboardBookingsPage() {
   const filterBookings = () => {
     let filtered = [...bookings];
 
-    // Filter by search term
+    // Filter berdasarkan kata kunci pencarian
     if (searchTerm) {
       filtered = filtered.filter(booking =>
         booking.guestName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -66,7 +66,7 @@ export default function DashboardBookingsPage() {
       );
     }
 
-    // Filter by status
+    // Filter berdasarkan status
     if (statusFilter !== 'all') {
       filtered = filtered.filter(booking => booking.status === statusFilter);
     }
@@ -79,29 +79,29 @@ export default function DashboardBookingsPage() {
       booking.id === bookingId ? { ...booking, status: newStatus } : booking
     ));
     toast({
-      title: "Success",
-      description: `Booking status updated to ${newStatus}`,
+      title: "Berhasil",
+      description: `Status pemesanan diperbarui menjadi ${newStatus}`,
     });
   };
 
   const deleteBooking = (bookingId: string) => {
     setBookings(prev => prev.filter(booking => booking.id !== bookingId));
     toast({
-      title: "Success",
-      description: "Booking deleted successfully",
+      title: "Berhasil",
+      description: "Pemesanan berhasil dihapus",
     });
   };
 
   const getStatusBadge = (status: Booking['status']) => {
     switch (status) {
       case 'confirmed':
-        return <Badge className="bg-green-100 text-green-800"><CheckCircle className="w-3 h-3 mr-1" />Confirmed</Badge>;
+        return <Badge className="bg-green-100 text-green-800"><CheckCircle className="w-3 h-3 mr-1" />Dikonfirmasi</Badge>;
       case 'pending':
-        return <Badge className="bg-yellow-100 text-yellow-800"><Clock className="w-3 h-3 mr-1" />Pending</Badge>;
+        return <Badge className="bg-yellow-100 text-yellow-800"><Clock className="w-3 h-3 mr-1" />Tertunda</Badge>;
       case 'cancelled':
-        return <Badge className="bg-red-100 text-red-800"><XCircle className="w-3 h-3 mr-1" />Cancelled</Badge>;
+        return <Badge className="bg-red-100 text-red-800"><XCircle className="w-3 h-3 mr-1" />Dibatalkan</Badge>;
       case 'completed':
-        return <Badge className="bg-blue-100 text-blue-800"><CheckCircle className="w-3 h-3 mr-1" />Completed</Badge>;
+        return <Badge className="bg-blue-100 text-blue-800"><CheckCircle className="w-3 h-3 mr-1" />Selesai</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
@@ -110,18 +110,18 @@ export default function DashboardBookingsPage() {
   const getPaymentStatusBadge = (status: Booking['paymentStatus']) => {
     switch (status) {
       case 'paid':
-        return <Badge className="bg-green-100 text-green-800">Paid</Badge>;
+        return <Badge className="bg-green-100 text-green-800">Lunas</Badge>;
       case 'pending':
-        return <Badge className="bg-yellow-100 text-yellow-800">Pending</Badge>;
+        return <Badge className="bg-yellow-100 text-yellow-800">Tertunda</Badge>;
       case 'refunded':
-        return <Badge className="bg-gray-100 text-gray-800">Refunded</Badge>;
+        return <Badge className="bg-gray-100 text-gray-800">Dikembalikan</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
     }
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('id-ID', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
@@ -129,9 +129,10 @@ export default function DashboardBookingsPage() {
   };
 
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('id-ID', {
       style: 'currency',
-      currency: 'USD'
+      currency: 'IDR',
+      minimumFractionDigits: 0
     }).format(amount);
   };
 
@@ -158,11 +159,11 @@ export default function DashboardBookingsPage() {
     totalBookings: bookings.length,
     pendingBookings: bookings.filter(b => b.status === 'pending').length,
     confirmedBookings: bookings.filter(b => b.status === 'confirmed').length,
-    totalRevenue: bookings.reduce((sum, b) => sum + b.totalPrice, 0)
+    totalRevenue: bookings.reduce((sum, b) => b.paymentStatus === 'paid' ? sum + b.totalPrice : sum, 0)
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       <div className="container mx-auto px-4 py-8">
@@ -172,17 +173,17 @@ export default function DashboardBookingsPage() {
           transition={{ duration: 0.6 }}
         >
           <div className="mb-8">
-            <h1 className="text-3xl font-bold mb-2">Booking Management</h1>
-            <p className="text-muted-foreground">Manage all hotel bookings and reservations</p>
+            <h1 className="text-3xl font-bold mb-2">Manajemen Pemesanan</h1>
+            <p className="text-muted-foreground">Kelola semua pemesanan dan reservasi hotel</p>
           </div>
 
-          {/* Stats Cards */}
+          {/* Kartu Statistik */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Total Bookings</p>
+                    <p className="text-sm font-medium text-muted-foreground">Total Pemesanan</p>
                     <p className="text-2xl font-bold">{stats.totalBookings}</p>
                   </div>
                   <Calendar className="h-8 w-8 text-primary" />
@@ -194,7 +195,7 @@ export default function DashboardBookingsPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Pending</p>
+                    <p className="text-sm font-medium text-muted-foreground">Tertunda</p>
                     <p className="text-2xl font-bold text-yellow-600">{stats.pendingBookings}</p>
                   </div>
                   <Clock className="h-8 w-8 text-yellow-600" />
@@ -206,7 +207,7 @@ export default function DashboardBookingsPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Confirmed</p>
+                    <p className="text-sm font-medium text-muted-foreground">Dikonfirmasi</p>
                     <p className="text-2xl font-bold text-green-600">{stats.confirmedBookings}</p>
                   </div>
                   <CheckCircle className="h-8 w-8 text-green-600" />
@@ -218,7 +219,7 @@ export default function DashboardBookingsPage() {
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground">Total Revenue</p>
+                    <p className="text-sm font-medium text-muted-foreground">Total Pendapatan</p>
                     <p className="text-2xl font-bold">{formatCurrency(stats.totalRevenue)}</p>
                   </div>
                   <DollarSign className="h-8 w-8 text-primary" />
@@ -227,17 +228,17 @@ export default function DashboardBookingsPage() {
             </Card>
           </div>
 
-          {/* Filters */}
+          {/* Filter */}
           <Card className="mb-8">
             <CardContent className="p-6">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1">
-                  <Label htmlFor="search">Search Bookings</Label>
-                  <div className="relative">
+                  <Label htmlFor="search">Cari Pemesanan</Label>
+                  <div className="relative mt-1">
                     <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="search"
-                      placeholder="Search by guest name, email, room, or booking ID..."
+                      placeholder="Cari berdasarkan nama tamu, email, kamar, atau ID..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10"
@@ -245,36 +246,36 @@ export default function DashboardBookingsPage() {
                   </div>
                 </div>
                 <div className="w-full md:w-48">
-                  <Label htmlFor="status">Filter by Status</Label>
+                  <Label htmlFor="status">Filter berdasarkan Status</Label>
                   <Select value={statusFilter} onValueChange={setStatusFilter}>
-                    <SelectTrigger>
+                    <SelectTrigger id="status" className="mt-1">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">All Status</SelectItem>
-                      <SelectItem value="pending">Pending</SelectItem>
-                      <SelectItem value="confirmed">Confirmed</SelectItem>
-                      <SelectItem value="cancelled">Cancelled</SelectItem>
-                      <SelectItem value="completed">Completed</SelectItem>
+                      <SelectItem value="all">Semua Status</SelectItem>
+                      <SelectItem value="pending">Tertunda</SelectItem>
+                      <SelectItem value="confirmed">Dikonfirmasi</SelectItem>
+                      <SelectItem value="cancelled">Dibatalkan</SelectItem>
+                      <SelectItem value="completed">Selesai</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="flex items-end">
                   <Button variant="outline">
                     <Download className="h-4 w-4 mr-2" />
-                    Export
+                    Ekspor
                   </Button>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Bookings Table */}
+          {/* Tabel Pemesanan */}
           <Card>
             <CardHeader>
-              <CardTitle>All Bookings</CardTitle>
+              <CardTitle>Semua Pemesanan</CardTitle>
               <CardDescription>
-                {filteredBookings.length} booking{filteredBookings.length !== 1 ? 's' : ''} found
+                {filteredBookings.length} pemesanan ditemukan
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -282,15 +283,15 @@ export default function DashboardBookingsPage() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Booking ID</TableHead>
-                      <TableHead>Guest</TableHead>
-                      <TableHead>Room</TableHead>
-                      <TableHead>Dates</TableHead>
-                      <TableHead>Guests</TableHead>
+                      <TableHead>ID Pemesanan</TableHead>
+                      <TableHead>Tamu</TableHead>
+                      <TableHead>Kamar</TableHead>
+                      <TableHead>Tanggal</TableHead>
+                      <TableHead>Jumlah Tamu</TableHead>
                       <TableHead>Total</TableHead>
                       <TableHead>Status</TableHead>
-                      <TableHead>Payment</TableHead>
-                      <TableHead>Actions</TableHead>
+                      <TableHead>Pembayaran</TableHead>
+                      <TableHead className="text-right">Aksi</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -307,18 +308,18 @@ export default function DashboardBookingsPage() {
                         <TableCell>
                           <div>
                             <p className="text-sm">{formatDate(booking.checkIn)} - {formatDate(booking.checkOut)}</p>
-                            <p className="text-xs text-muted-foreground">{calculateNights(booking.checkIn, booking.checkOut)} nights</p>
+                            <p className="text-xs text-muted-foreground">{calculateNights(booking.checkIn, booking.checkOut)} malam</p>
                           </div>
                         </TableCell>
                         <TableCell>{booking.guests}</TableCell>
                         <TableCell className="font-medium">{formatCurrency(booking.totalPrice)}</TableCell>
                         <TableCell>{getStatusBadge(booking.status)}</TableCell>
                         <TableCell>{getPaymentStatusBadge(booking.paymentStatus)}</TableCell>
-                        <TableCell>
-                          <div className="flex items-center space-x-2">
+                        <TableCell className="text-right">
+                          <div className="flex items-center justify-end space-x-1">
                             <Button
                               variant="ghost"
-                              size="sm"
+                              size="icon"
                               onClick={() => {
                                 setSelectedBooking(booking);
                                 setShowBookingDetails(true);
@@ -329,7 +330,7 @@ export default function DashboardBookingsPage() {
                             {booking.status === 'pending' && (
                               <Button
                                 variant="ghost"
-                                size="sm"
+                                size="icon"
                                 onClick={() => updateBookingStatus(booking.id, 'confirmed')}
                                 className="text-green-600 hover:text-green-700"
                               >
@@ -338,7 +339,7 @@ export default function DashboardBookingsPage() {
                             )}
                             <Button
                               variant="ghost"
-                              size="sm"
+                              size="icon"
                               onClick={() => deleteBooking(booking.id)}
                               className="text-red-600 hover:text-red-700"
                             >
@@ -356,84 +357,84 @@ export default function DashboardBookingsPage() {
         </motion.div>
       </div>
 
-      {/* Booking Details Dialog */}
+      {/* Dialog Detail Pemesanan */}
       <Dialog open={showBookingDetails} onOpenChange={setShowBookingDetails}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Booking Details</DialogTitle>
+            <DialogTitle>Detail Pemesanan</DialogTitle>
             <DialogDescription>
-              Complete information for booking {selectedBooking?.id}
+              Informasi lengkap untuk pemesanan #{selectedBooking?.id}
             </DialogDescription>
           </DialogHeader>
           {selectedBooking && (
-            <div className="space-y-6">
+            <div className="space-y-6 py-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label className="text-sm font-medium">Booking ID</Label>
-                  <p className="text-sm">{selectedBooking.id}</p>
+                  <Label className="text-sm font-medium text-muted-foreground">ID Pemesanan</Label>
+                  <p className="font-semibold">{selectedBooking.id}</p>
                 </div>
                 <div>
-                  <Label className="text-sm font-medium">Status</Label>
+                  <Label className="text-sm font-medium text-muted-foreground">Status</Label>
                   <div className="mt-1">{getStatusBadge(selectedBooking.status)}</div>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label className="text-sm font-medium">Guest Name</Label>
-                  <p className="text-sm">{selectedBooking.guestName}</p>
+                  <Label className="text-sm font-medium text-muted-foreground">Nama Tamu</Label>
+                  <p>{selectedBooking.guestName}</p>
                 </div>
                 <div>
-                  <Label className="text-sm font-medium">Email</Label>
-                  <p className="text-sm">{selectedBooking.guestEmail}</p>
+                  <Label className="text-sm font-medium text-muted-foreground">Email</Label>
+                  <p>{selectedBooking.guestEmail}</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label className="text-sm font-medium">Phone</Label>
-                  <p className="text-sm">{selectedBooking.guestPhone}</p>
+                  <Label className="text-sm font-medium text-muted-foreground">Telepon</Label>
+                  <p>{selectedBooking.guestPhone}</p>
                 </div>
                 <div>
-                  <Label className="text-sm font-medium">Room</Label>
-                  <p className="text-sm">{selectedBooking.roomName}</p>
+                  <Label className="text-sm font-medium text-muted-foreground">Kamar</Label>
+                  <p>{selectedBooking.roomName}</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <Label className="text-sm font-medium">Check-in</Label>
-                  <p className="text-sm">{formatDate(selectedBooking.checkIn)}</p>
+                  <Label className="text-sm font-medium text-muted-foreground">Check-in</Label>
+                  <p>{formatDate(selectedBooking.checkIn)}</p>
                 </div>
                 <div>
-                  <Label className="text-sm font-medium">Check-out</Label>
-                  <p className="text-sm">{formatDate(selectedBooking.checkOut)}</p>
+                  <Label className="text-sm font-medium text-muted-foreground">Check-out</Label>
+                  <p>{formatDate(selectedBooking.checkOut)}</p>
                 </div>
                 <div>
-                  <Label className="text-sm font-medium">Guests</Label>
-                  <p className="text-sm">{selectedBooking.guests}</p>
+                  <Label className="text-sm font-medium text-muted-foreground">Jumlah Tamu</Label>
+                  <p>{selectedBooking.guests}</p>
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label className="text-sm font-medium">Total Price</Label>
+                  <Label className="text-sm font-medium text-muted-foreground">Total Harga</Label>
                   <p className="text-lg font-bold">{formatCurrency(selectedBooking.totalPrice)}</p>
                 </div>
                 <div>
-                  <Label className="text-sm font-medium">Payment Status</Label>
+                  <Label className="text-sm font-medium text-muted-foreground">Status Pembayaran</Label>
                   <div className="mt-1">{getPaymentStatusBadge(selectedBooking.paymentStatus)}</div>
                 </div>
               </div>
 
               {selectedBooking.specialRequests && (
                 <div>
-                  <Label className="text-sm font-medium">Special Requests</Label>
+                  <Label className="text-sm font-medium text-muted-foreground">Permintaan Khusus</Label>
                   <p className="text-sm mt-1 p-3 bg-muted rounded-md">{selectedBooking.specialRequests}</p>
                 </div>
               )}
 
-              <div className="flex justify-end space-x-2">
+              <div className="flex justify-end space-x-2 pt-4">
                 {selectedBooking.status === 'pending' && (
                   <Button
                     onClick={() => {
@@ -442,14 +443,14 @@ export default function DashboardBookingsPage() {
                     }}
                     className="bg-green-600 hover:bg-green-700"
                   >
-                    Confirm Booking
+                    Konfirmasi Pemesanan
                   </Button>
                 )}
                 <Button
                   variant="outline"
                   onClick={() => setShowBookingDetails(false)}
                 >
-                  Close
+                  Tutup
                 </Button>
               </div>
             </div>

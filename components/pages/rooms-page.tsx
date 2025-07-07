@@ -21,10 +21,10 @@ export default function RoomsPage() {
   const [showFilters, setShowFilters] = useState(false);
   
   // Filter states
-  const [checkIn, setCheckIn] = useState(searchParams.get('checkin') || '');
-  const [checkOut, setCheckOut] = useState(searchParams.get('checkout') || '');
-  const [guests, setGuests] = useState(searchParams.get('guests') || 'all');
-  const [roomType, setRoomType] = useState(searchParams.get('type') || 'all');
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [guests, setGuests] = useState('all');
+  const [roomType, setRoomType] = useState('all');
   const [priceRange, setPriceRange] = useState('all');
   const [sortBy, setSortBy] = useState('featured');
 

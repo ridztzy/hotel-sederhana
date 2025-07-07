@@ -71,7 +71,9 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-emerald-50 dark:from-gray-900 dark:to-gray-800 px-4">
+    <div className="min-h-screen flex items-center justify-center 
+      bg-gradient-to-br from-amber-100/80 via-white/80 to-white
+      dark:from-amber-600/80 dark:via-black/70 dark:to-black/90 px-4 transition-colors">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -80,16 +82,16 @@ export default function RegisterPage() {
       >
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-2 mb-4">
-            <Hotel className="h-8 w-8 text-primary" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
+            <Hotel className="h-8 w-8 text-amber-600" />
+            <span className="text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-400 bg-clip-text text-transparent">
               LuxeStay
             </span>
           </Link>
-          <h1 className="text-2xl font-bold">Buat Akun</h1>
+          <h1 className="text-2xl font-bold text-foreground">Buat Akun</h1>
           <p className="text-muted-foreground">Gabung dengan LuxeStay untuk berbagai keuntungan eksklusif</p>
         </div>
 
-        <Card>
+        <Card className="bg-white/80 dark:bg-background/80 shadow-lg border-none">
           <CardHeader>
             <CardTitle>Daftar</CardTitle>
             <CardDescription>
@@ -190,7 +192,7 @@ export default function RegisterPage() {
 
               <Button 
                 type="submit" 
-                className="w-full" 
+                className="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white"
                 disabled={loading}
               >
                 {loading ? "Membuat Akun..." : "Buat Akun"}
@@ -200,7 +202,7 @@ export default function RegisterPage() {
             <div className="mt-6 text-center text-sm">
               <p className="text-muted-foreground">
                 Sudah punya akun?{' '}
-                <Link href="/login" className="text-primary hover:underline">
+                <Link href="/login" className="text-amber-600 hover:underline">
                   Masuk
                 </Link>
               </p>
